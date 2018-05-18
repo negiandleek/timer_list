@@ -8,6 +8,7 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, "dict"),
     },
+    devtool: "inline-source-map",
     output: {
         filename: "bundle.js",
         path: path.join(__dirname, "dict/")
