@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 
 class TimerManager extends React.Component{
     constructor(props){
@@ -13,10 +14,12 @@ class TimerManager extends React.Component{
     render(){
         return(
             <div className="timer_list">
-                {this.state.items.map((items)=>(
+                {this.state.items.map((items,i)=>(
                     <Timers
                         tick={this.tick.bind(this)}
                         items={items}
+                        index={i}
+                        key={"timers-" + i}
                     />
                 ))}
             </div>
@@ -38,7 +41,7 @@ const Timers = (props) => {
     return (
         <ul>
             {props.items.map((item, i) => (
-                <li>
+                <li key={"timer-" + props.index + "-" + i}>
                     <Timer 
                         item={item}
                         tick={props.tick}
@@ -48,6 +51,10 @@ const Timers = (props) => {
         </ul>
     )
 }
+
+Timers.propTypes = {
+    item: PropTypes.array
+};
 
 class Timer extends React.Component{
     constructor(props){
@@ -78,6 +85,14 @@ class Timer extends React.Component{
         clearInterval(this.interval);
     }
 }
+
+Timer.propTypes = {
+    count: PropTypes.number,
+    item: PropTypes.shape({
+        parent_id: PropTypes.number,
+        child_id: PropTypes.number
+    })
+};
 
 ReactDOM.render(
     <TimerManager />,
