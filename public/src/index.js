@@ -1,39 +1,67 @@
+"use strict"
 import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 
-const App = (props) => {
-    return(
-        <main className="main">
-            <TimerInput />
-            <TimerManager />
-        </main>
-    )
+class App extends React.Component{
+    constructor(props){
+        super();
+        this.state = {
+            count: "0000",
+            type: 0
+        };
+    }
+    render(){
+        return(
+            <main className="main">
+                <TimerInput 
+                    {...this.state}
+                    handle_submit={this.handle_submit.bind(this)}
+                />
+                <TimerManager />
+            </main>
+        )
+    }
+    handle_submit(){
+        this.setState({
+            count: "0000",
+        });
+    }
 }
 
 class TimerInput extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            count: 0,
-            type: 0
-        }
     }
     render(){
         return (
             <div className="timer-input">
-                <input 
-                    type="text"
-                    value={this.state.count}
-                    readOnly
-                />
-                <input 
-                    type="button"
-                    value="add"
-                />
+                <form 
+                    className="timer-input__form"
+                    action="javascript:void(0)"
+                    onSubmit={this.props.handle_submit}
+                >
+                    <input 
+                        type="text"
+                        value={this.props.count}
+                        readOnly
+                    />
+                    <input 
+                        type="submit" 
+                        value="add"
+                    />
+                </form>
             </div>
         )
     }
+    normalize_timer(str){
+        
+    }
+}
+
+TimerInput.propTypes = {
+    count: PropTypes.string.isRequired,
+    type: PropTypes.number.isRequired
 }
 
 
