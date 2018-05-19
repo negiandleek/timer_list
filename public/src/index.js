@@ -2,6 +2,41 @@ import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 
+const App = (props) => {
+    return(
+        <main className="main">
+            <TimerInput />
+            <TimerManager />
+        </main>
+    )
+}
+
+class TimerInput extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            count: 0,
+            type: 0
+        }
+    }
+    render(){
+        return (
+            <div className="timer-input">
+                <input 
+                    type="text"
+                    value={this.state.count}
+                    readOnly
+                />
+                <input 
+                    type="button"
+                    value="add"
+                />
+            </div>
+        )
+    }
+}
+
+
 class TimerManager extends React.Component{
     constructor(props){
         super(props);
@@ -95,6 +130,6 @@ Timer.propTypes = {
 };
 
 ReactDOM.render(
-    <TimerManager />,
+    <App />,
     document.getElementById("root")
 )
