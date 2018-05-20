@@ -2,9 +2,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
+import MY from "./my";
 
-console.log(MY)
-
+var hoge = new MY.HourSecond("0000")
 class App extends React.Component{
     constructor(props){
         super();

@@ -29,7 +29,6 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin([
-            {from: "public/src/my.js"},
             {from: "public/index.html"}
         ])
     ]
