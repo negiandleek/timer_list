@@ -2,7 +2,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import MY from "./my";
+import My from "./my";
+
+const my = new My("FOUR");
 
 class App extends React.Component{
     constructor(props){
@@ -12,7 +14,7 @@ class App extends React.Component{
             type: 0,
             /*[
                 [
-                    {parent_id:0,child_id:0},
+                    {parent_id:0,child_id:0,},
                     {parent_id:0, child_id:1}
                 ],
                 [
@@ -75,8 +77,6 @@ class App extends React.Component{
 class TimerInput extends React.Component{
     constructor(props){
         super(props);
-    
-        // this.timer = new MY.HourSecond(this.props.)
     }
     // getDerivedStateFromProps(nextProp, prevState){
 
