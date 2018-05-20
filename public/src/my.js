@@ -5,7 +5,7 @@
 
     const previous = root.MY;
 
-    MY = function(){};
+    let MY = function(){};
 
     if (typeof exports !== 'undefined') {
         // Support Node.js specific `module.exports`
@@ -16,5 +16,12 @@
         exports.MY = MY;
     }else{
         root.MY = MY;
+    }
+
+    MY.Time = class Time{
+        constructor(){
+            this.len; //4,6
+            this.num;
+        }
     }
 })()
