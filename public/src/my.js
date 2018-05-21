@@ -60,7 +60,8 @@ import _ from "underscore";
         }
         return true;
     }
-
+    
+    // milli convert time(hours, minutes, seconds)
     p.conversion_milli_to_time = function(value){
         // check type
         this.is_time(value);
@@ -71,13 +72,13 @@ import _ from "underscore";
         let seconds = 0;
 
         hours = Math.floor(result / My.milli_hour);
-        result = result - hours * My.milli_hour;
+        result = result - (hours * My.milli_hour);
 
         minutes = Math.floor(result / My.milli_minute);
-        result = minutes - hours * My.milli_minute;
+        result = result - (minutes * My.milli_minute);
 
         seconds = Math.floor(result / My.milli_second);
-        result = result - seconds * My.milli_second;
+        result = result - (seconds * My.milli_second);
 
         return {
             hours: hours,
@@ -86,7 +87,7 @@ import _ from "underscore";
         };
     }
 
-    // 00:90 -> 01:30
+    // time convert milli based on type
     p.conversion_time = function(value){
         // check type
         this.is_time(value);
@@ -103,25 +104,26 @@ import _ from "underscore";
             minutes = Number(value.slice(0,2)) * My.milli_minute;
             seconds = Number(value.slice(2,4)) * My.milli_second;
         }
-        
+
         return p.conversion_milli_to_time(hours + minutes + seconds);
     }
 
-    p.zero_padding = function(value){
-        let m = String(value)
-        let str = new Array(3).join("0");
-        return (str + m).slice(-2);
+    p.zero_padding = function(value, range = 2){
+        if(_.isObject(value)){
+            for(let key in value){
+                let m = String(value[key])
+                let str = new Array(range + 1).join("0");
+                value[key] = (str + m).slice(-1 * range);
+            }
+            return value;
+        }else{
+            // check type
+            // this.is_time(value);
+            return (this.zero_padding({temp: value}, range)).temp;
+        }
     }
 
-    p.zero_type_padding = function(value){
-        // check type
-        this.is_time(value);
-
-        let str = new Array(TYPE[this.__type] + 1).join("0");
-        return (str + value).slice(-1 * TYPE[this.__type]);
-    }
-
-    p.zero_type_unpadding = function(value){
+    p.zero_unpadding = function(value){
         // check type
         this.is_time(value);
 
@@ -132,32 +134,24 @@ import _ from "underscore";
         return r;
     }
 
-    // p.zero_padding_colon = function(value){
-    //     return value.split(":").map((num)=>{
-    //         let n = String(num);
-    //         let str = new Array(3).join("0");
-    //         return (str + n).slice(-2);
-    //     }).join(":");
-    // }
-    
-
     p.increment = function(value){
         // check type
         this.is_time(value);
 
-        let n = Number(this.zero_type_unpadding(value)) + 1;
-        let m = this.conversion_time(this.zero_type_padding(n));
-        let zero_m = String(this.zero_padding(m.minutes));
-        let zero_s = String(this.zero_padding(m.seconds));
-        return zero_m + zero_s;
+        let n = Number(this.zero_unpadding(value)) + 1;
+        let m = this.zero_padding(n, 4);
+        let l = this.conversion_time(m, 2);
+        let r = this.zero_padding(l);
+        let time = r.hours + r.minutes + r.seconds;
+        return time.slice(-1 * TYPE[this.__type]);
     }
 
     p.decrement = function(value){
         // check type
         this.is_time(value);
 
-        let r = Number(this.zero_type_unpadding(value)) - 1;
+        let r = Number(this.zero_unpadding(value)) - 1;
         
-        return this.zero_type_padding(r);
+        return this.zero_padding(r);
     }
 })()

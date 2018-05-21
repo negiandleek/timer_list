@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import My from "./my";
 
 const my = new My("FOUR");
+
 class App extends React.Component{
     constructor(props){
         super(props);
@@ -67,7 +68,7 @@ class App extends React.Component{
         let new_state = this.state.items.slice();
         let temp = new_state[args.parent_id][args.child_id];
         let r = my.increment(temp.count);
-        console.log(r)
+        // console.log(r)
         temp.count = r;
 
         this.setState(()=>({
