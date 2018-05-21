@@ -66,8 +66,10 @@ class App extends React.Component{
         const args = arguments[0];
        
         let new_state = this.state.items.slice();
-        new_state[args.parent_id][args.child_id].count += 1;
-      
+        let temp = new_state[args.parent_id][args.child_id];
+        let r = my.increment(temp.count);
+        temp.count = r;
+
         this.setState(()=>({
             items: new_state
         }));
@@ -115,7 +117,7 @@ const Timers = (props) => {
             {props.items.map((item, i) => (
                 <li key={"timer-" + props.index + "-" + i}>
                     <Timer 
-                        item={item}
+                        data={item}
                         tick={props.tick}
                     />
                 </li>
@@ -133,10 +135,13 @@ class Timer extends React.Component{
         super(props);
         this.interval;
     }
+    componentDidMount(){
+        this.start();
+    }
     render(){
         return (
             <div className="timer">
-                {this.props.item.count}
+                {this.props.data.count}
                 <div className="timer__btns">
                     <input type="button" value="start" onClick={this.start.bind(this)} />
                     <input type="button" value="stop" onClick={this.stop.bind(this)} />
@@ -145,7 +150,9 @@ class Timer extends React.Component{
         )
     }
     start(){
-        const props = this.props.item;
+        if(this.interval)return;
+        
+        const props = this.props.data;
         this.interval = setInterval(() => this.props.tick(
             {
                 parent_id: props.parent_id,
@@ -160,7 +167,7 @@ class Timer extends React.Component{
 
 Timer.propTypes = {
     count: PropTypes.number,
-    item: PropTypes.shape({
+    data: PropTypes.shape({
         parent_id: PropTypes.number,
         child_id: PropTypes.number
     })

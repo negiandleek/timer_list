@@ -35,6 +35,7 @@ import _ from "underscore";
     My.reg_type = /^(?:FOUR)|(?:SIX)$/;
     My.reg_hour_second = /^[0-9]{1,4}$/;
     My.reg_time_split = /([0-9]{2})(?=[0-9]{2})/g;
+    My.reg_non_zero = /^(0+)([1-9]*)$/g;
 
     p.display = function(value){
         return value.replace(My.reg_time_split,(match)=> match + ":");
@@ -59,5 +60,34 @@ import _ from "underscore";
 
         let str = new Array(TYPE[this.__type] + 1).join("0");
         return (str + value).slice(-1 * TYPE[this.__type]);
+    }
+
+    p.zero_unpadding = function(value){
+        // check type
+        this.is_hour_second(value);
+
+        let r = value.replace(My.reg_zero, (match, $1, $2)=>{
+            return typeof $2 === "undefined"? 0: $2;
+        });
+        
+        return r;
+    }
+
+    p.increment = function(value){
+        // check type
+        this.is_hour_second(value);
+
+        let r = Number(this.zero_unpadding(value)) + 1;
+        
+        return this.zero_padding(r);
+    }
+
+    p.decrement = function(value){
+        // check type
+        this.is_hour_second(value);
+
+        let r = Number(this.zero_unpadding(value)) - 1;
+        
+        return this.zero_padding(r);
     }
 })()
