@@ -135,9 +135,6 @@ class Timer extends React.Component{
         super(props);
         this.interval;
     }
-    componentDidMount(){
-        this.start();
-    }
     render(){
         return (
             <div className="timer">
