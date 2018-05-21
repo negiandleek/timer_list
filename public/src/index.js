@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import My from "./my";
 
 const my = new My("FOUR");
-
 class App extends React.Component{
     constructor(props){
         super(props);
@@ -68,6 +67,7 @@ class App extends React.Component{
         let new_state = this.state.items.slice();
         let temp = new_state[args.parent_id][args.child_id];
         let r = my.increment(temp.count);
+        console.log(r)
         temp.count = r;
 
         this.setState(()=>({
@@ -84,6 +84,7 @@ class TimerInput extends React.Component{
 
     // }
     render(){
+        const correct_count = my.display(this.props.count);
         return (
             <div className="timer-input">
                 <form 
@@ -93,7 +94,7 @@ class TimerInput extends React.Component{
                 >
                     <input 
                         type="text"
-                        value={this.props.count}
+                        value={correct_count}
                         readOnly
                     />
                     <input 
@@ -135,10 +136,14 @@ class Timer extends React.Component{
         super(props);
         this.interval;
     }
+    componentDidMount(){
+        this.start();
+    }
     render(){
+        const correct_count = my.display(this.props.data.count);
         return (
             <div className="timer">
-                {this.props.data.count}
+                {correct_count}
                 <div className="timer__btns">
                     <input type="button" value="start" onClick={this.start.bind(this)} />
                     <input type="button" value="stop" onClick={this.stop.bind(this)} />

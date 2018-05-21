@@ -7,7 +7,10 @@ import _ from "underscore";
     const previous = root.My;
     const TYPE = {
         "FOUR": 4,
-        "SIX": 6
+        "SIX": 6,
+        /*
+        "TIMESTAMP": 16 //new Date(8640000000000000)
+        */
     };
 
     let My = class My{
@@ -36,12 +39,16 @@ import _ from "underscore";
     My.reg_hour_second = /^[0-9]{1,4}$/;
     My.reg_time_split = /([0-9]{2})(?=[0-9]{2})/g;
     My.reg_non_zero = /^(0+)([1-9]*)$/g;
+    My.milli_hour = 100 * 60 * 60;
+    My.milli_minute = 100 * 60;
+    My.milli_second = 100;
 
     p.display = function(value){
         return value.replace(My.reg_time_split,(match)=> match + ":");
     }
 
-    p.is_hour_second = function(value){
+    // TODO:set関数を利用してp.is_timeを書かなくて良いようにする？？？
+    p.is_time = function(value){
         if(!_.isString(value)){
             return ("[HourSecond] must be string type]");
         }
@@ -54,17 +61,69 @@ import _ from "underscore";
         return true;
     }
 
-    p.zero_padding = function(value){
+    p.conversion_milli_to_time = function(value){
         // check type
-        this.is_hour_second(value);
+        this.is_time(value);
+
+        let result = value;
+        let hours = 0;
+        let minutes = 0
+        let seconds = 0;
+
+        hours = Math.floor(result / My.milli_hour);
+        result = result - hours * My.milli_hour;
+
+        minutes = Math.floor(result / My.milli_minute);
+        result = minutes - hours * My.milli_minute;
+
+        seconds = Math.floor(result / My.milli_second);
+        result = result - seconds * My.milli_second;
+
+        return {
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds
+        };
+    }
+
+    // 00:90 -> 01:30
+    p.conversion_time = function(value){
+        // check type
+        this.is_time(value);
+        let hours = 0;
+        let minutes = 0;
+        let seconds = 0;
+    
+        if(TYPE[this.__type] >= 6){
+            hours = Number(value.slice(0,2)) * My.milli_hour;
+            value = value.slice(2,);
+        }
+
+        if(TYPE[this.__type] >= 4){
+            minutes = Number(value.slice(0,2)) * My.milli_minute;
+            seconds = Number(value.slice(2,4)) * My.milli_second;
+        }
+        
+        return p.conversion_milli_to_time(hours + minutes + seconds);
+    }
+
+    p.zero_padding = function(value){
+        let m = String(value)
+        let str = new Array(3).join("0");
+        return (str + m).slice(-2);
+    }
+
+    p.zero_type_padding = function(value){
+        // check type
+        this.is_time(value);
 
         let str = new Array(TYPE[this.__type] + 1).join("0");
         return (str + value).slice(-1 * TYPE[this.__type]);
     }
 
-    p.zero_unpadding = function(value){
+    p.zero_type_unpadding = function(value){
         // check type
-        this.is_hour_second(value);
+        this.is_time(value);
 
         let r = value.replace(My.reg_zero, (match, $1, $2)=>{
             return typeof $2 === "undefined"? 0: $2;
@@ -73,21 +132,32 @@ import _ from "underscore";
         return r;
     }
 
+    // p.zero_padding_colon = function(value){
+    //     return value.split(":").map((num)=>{
+    //         let n = String(num);
+    //         let str = new Array(3).join("0");
+    //         return (str + n).slice(-2);
+    //     }).join(":");
+    // }
+    
+
     p.increment = function(value){
         // check type
-        this.is_hour_second(value);
+        this.is_time(value);
 
-        let r = Number(this.zero_unpadding(value)) + 1;
-        
-        return this.zero_padding(r);
+        let n = Number(this.zero_type_unpadding(value)) + 1;
+        let m = this.conversion_time(this.zero_type_padding(n));
+        let zero_m = String(this.zero_padding(m.minutes));
+        let zero_s = String(this.zero_padding(m.seconds));
+        return zero_m + zero_s;
     }
 
     p.decrement = function(value){
         // check type
-        this.is_hour_second(value);
+        this.is_time(value);
 
-        let r = Number(this.zero_unpadding(value)) - 1;
+        let r = Number(this.zero_type_unpadding(value)) - 1;
         
-        return this.zero_padding(r);
+        return this.zero_type_padding(r);
     }
 })()
