@@ -1,16 +1,22 @@
 import _ from "underscore";
 (function (){
+    // TODO: es6のモジュールパターンに変更する
     const root = (typeof window == 'object' && window.self === self && window) ||
                 (typeof global == 'object' && global.global === global && global) ||
                 {};
 
     const previous = root.My;
+
+    // TODO: 自作typeはhours:minutes:seconds:millisなので最大8桁
+    // 送られてきた数によって処理を変える。
+    // hours -> minutes -> seconds -> millis
+    // hoursがいらない場合はユーザーの処理に任せる。もしくは、hoursかmillisを除くメソッドを作る
+    // timestampを用いた処理は宣言的に行う。
+    // 関数型っぽく行っていく
+
     const TYPE = {
         "FOUR": 4,
         "SIX": 6,
-        /*
-        "TIMESTAMP": 16 //new Date(8640000000000000)
-        */
     };
 
     let My = class My{
