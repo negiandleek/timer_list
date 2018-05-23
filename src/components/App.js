@@ -1,11 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import My from "../modules/index.js";
+import ticktack from "../modules/index";
 
 import TimerInput from "./TimerInput";
 import Timers from "./Timers";
-
-let my = new My("FOUR");
 
 export default class App extends React.Component{
     constructor(props){
@@ -68,8 +66,7 @@ export default class App extends React.Component{
        
         let new_state = this.state.items.slice();
         let temp = new_state[args.parent_id][args.child_id];
-        let r = my.increment(temp.count);
-        // console.log(r)
+        let r = ticktack.forward_time(temp.count);
         temp.count = r;
 
         this.setState(()=>({

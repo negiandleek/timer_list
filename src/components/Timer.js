@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import My from "../modules/index.js";
+import ticktack from "../modules/index";
 
-let my = new My("four");
 
 export default class Timer extends React.Component{
     constructor(props){
@@ -13,7 +12,7 @@ export default class Timer extends React.Component{
         this.start();
     }
     render(){
-        const correct_count = my.display(this.props.data.count);
+        const correct_count = ticktack.display(this.props.data.count);
         return (
             <div className="timer">
                 {correct_count}
