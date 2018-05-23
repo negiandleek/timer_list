@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import My from "../my.js";
+import My from "../modules/index.js";
 
 let my = new My("four");
 

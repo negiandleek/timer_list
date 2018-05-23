@@ -4,14 +4,14 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
     mode: "development",
     watch: true,
-    entry: "./public/src/index.js",
+    entry: "./src/index.js",
     devServer: {
-        contentBase: path.join(__dirname, "dict"),
+        contentBase: path.join(__dirname, "public"),
     },
     devtool: "inline-source-map",
     output: {
         filename: "bundle.js",
-        path: path.join(__dirname, "dict/")
+        path: path.join(__dirname, "public/")
     },
     module: {
         rules: [
@@ -29,7 +29,7 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin([
-            {from: "public/index.html"}
+            {from: "src/index.html"}
         ])
     ]
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Timer from "./TImer";
+import Timer from "./Timer";
 
 const Timers = (props) => {
     return (

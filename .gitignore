@@ -1,3 +1,6 @@
 node_modules/
 dict/
 .bash_profile
+.package-lock.json
+**/*debug*
+**/cache/*

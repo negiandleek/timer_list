@@ -1,3 +1,9 @@
+/*
+{
+    "name": "ticktack",
+    "version": "1.0.0"
+}
+*/
 import _ from "underscore";
 (function (){
     // TODO: es6のモジュールパターンに変更する

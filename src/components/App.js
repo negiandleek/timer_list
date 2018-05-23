@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import My from "../my";
+import My from "../modules/index.js";
 
 import TimerInput from "./TimerInput";
 import Timers from "./Timers";
