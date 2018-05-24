@@ -2,6 +2,7 @@ import _ from "underscore";
 
 const reg = /[^0-9]/g;
 
+// TODO:is_timeは引数をすべて調べる
 export default function is_time(value){
     if(value == null || typeof value === "undefined"){
         throw new Error("value is null or not defined");

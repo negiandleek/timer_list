@@ -29,6 +29,7 @@ export default class App extends React.Component{
                 <TimerInput 
                     {...this.state}
                     handle_submit={this.handle_submit.bind(this)}
+                    handle_change={this.handle_change.bind(this)}
                 />
                 <div className="timer_list">
                     {this.state.items.map((items,i)=>(
@@ -59,6 +60,13 @@ export default class App extends React.Component{
             count: "0000",
             type: 0,
             items: new_state
+        });
+    }
+    handle_change(e){
+        const undisp = ticktack.undisplay(e.target.value);
+        const result = ticktack.shift_time_to_input(this.state.count, undisp);
+        this.setState({
+            count: result
         });
     }
     tick(){

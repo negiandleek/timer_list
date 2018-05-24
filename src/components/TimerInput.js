@@ -21,7 +21,7 @@ export default class TimerInput extends React.Component{
                     <input 
                         type="text"
                         value={correct_count}
-                        readOnly
+                        onChange={this.props.handle_change}
                     />
                     <input 
                         type="submit" 
