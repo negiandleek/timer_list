@@ -13,11 +13,11 @@ export default class App extends React.Component{
             type: 0,
             /*[
                 [
-                    {parent_id:0,child_id:0,},
-                    {parent_id:0, child_id:1}
+                    {parent_id:0, count:0010,},
+                    {parent_id:0, count:0000}
                 ],
                 [
-                    {parent_id:1, child_id:0}
+                    {parent_id:1, count:0000}
                 ],
             ]*/
             items: [[],[],[]]
@@ -47,10 +47,12 @@ export default class App extends React.Component{
     handle_submit(){
         let s = this.state;
         let parent_id = s.type;
+        let sign = Number(s.count) === 0? 1: -1;
+
         let payload = {
             parent_id: parent_id,
-            child_id: s.items[s.type].length,
-            count: s.count
+            count: s.count,
+            sign: sign
         };
         
         let new_state = this.state.items.slice();
@@ -58,8 +60,8 @@ export default class App extends React.Component{
 
         this.setState({
             count: "0000",
-            type: 0,
-            items: new_state
+            items: new_state,
+            type: 0
         });
     }
     handle_change(e){
@@ -70,12 +72,18 @@ export default class App extends React.Component{
         });
     }
     tick(){
-        const args = arguments[0];
-       
+        const parent_id = arguments[0];
+        const sign = arguments[1];
+        const index = arguments[2];
+
         let new_state = this.state.items.slice();
-        let temp = new_state[args.parent_id][args.child_id];
-        let r = ticktack.forward_time(temp.count);
+        let temp = new_state[parent_id][index];
+        let r = ticktack.forward_time(temp.count, sign);
         temp.count = r;
+
+        if(r < 0){
+            new_state[parent_id].splice(index, 1);
+        }
 
         this.setState(()=>({
             items: new_state

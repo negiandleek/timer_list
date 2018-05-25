@@ -11,6 +11,10 @@ export default class Timer extends React.Component{
     componentDidMount(){
         this.start();
     }
+    componentWillUnmount(){
+        console.log(this.interval)
+        clearInterval(this.interval);
+    }
     render(){
         const correct_count = ticktack.display(this.props.data.count);
         return (
@@ -25,13 +29,11 @@ export default class Timer extends React.Component{
     }
     start(){
         if(this.interval)return;
-        
         const props = this.props.data;
         this.interval = setInterval(() => this.props.tick(
-            {
-                parent_id: props.parent_id,
-                child_id: props.child_id
-            }
+            props.parent_id,
+            props.sign,
+            this.props.index
         ), 1000);
     }
     stop(){

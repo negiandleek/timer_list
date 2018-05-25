@@ -9,6 +9,7 @@ const Timers = (props) => {
             {props.items.map((item, i) => (
                 <li key={"timer-" + props.index + "-" + i}>
                     <Timer 
+                        index = {i}
                         data={item}
                         tick={props.tick}
                     />
