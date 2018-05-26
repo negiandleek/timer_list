@@ -92,7 +92,7 @@ export default class App extends React.Component{
             }
         }
 
-        let r = ticktack.forward_time(temp.count, sign);
+        let r = ticktack.forward_time(temp.count, sign * 100);
         temp.count = r;
 
         if(r < 0){

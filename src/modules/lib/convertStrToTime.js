@@ -2,7 +2,7 @@ import is_time from "./isTime";
 import convert_milli_time from "./convertMilliToTime";
 
 export default function convert_str_to_time(value){
-    this.is_time(value)
+    is_time(value)
 
     // hour,minute,second;
     let time = [0,0,0];
