@@ -12,6 +12,7 @@ const Timers = (props) => {
                         index = {i}
                         data={item}
                         tick={props.tick}
+                        set_interval_id = {props.set_interval_id}
                     />
                 </li>
             ))}

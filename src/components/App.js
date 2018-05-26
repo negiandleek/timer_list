@@ -13,15 +13,16 @@ export default class App extends React.Component{
             type: 0,
             /*[
                 [
-                    {parent_id:0, count:0010,},
-                    {parent_id:0, count:0000}
+                    {parent_id:0, child_id: 0, count:0010,interval_id: 0},
+                    {...}
                 ],
                 [
-                    {parent_id:1, count:0000}
+                    {parent_id:1,...}
                 ],
             ]*/
             items: [[],[],[]]
         };
+        this.task_index = 0;
     }
     render(){
         return(
@@ -35,6 +36,7 @@ export default class App extends React.Component{
                     {this.state.items.map((items,i)=>(
                         <Timers
                             tick={this.tick.bind(this)}
+                            set_interval_id={this.set_interval_id.bind(this)}
                             items={items}
                             index={i}
                             key={"timers-" + i}
@@ -51,8 +53,10 @@ export default class App extends React.Component{
 
         let payload = {
             parent_id: parent_id,
+            child_id: this.task_index,
             count: s.count,
-            sign: sign
+            sign: sign,
+            interval_id: ""
         };
         
         let new_state = this.state.items.slice();
@@ -63,6 +67,7 @@ export default class App extends React.Component{
             items: new_state,
             type: 0
         });
+        this.task_index += 1;
     }
     handle_change(e){
         const undisp = ticktack.undisplay(e.target.value);
@@ -73,17 +78,49 @@ export default class App extends React.Component{
     }
     tick(){
         const parent_id = arguments[0];
-        const sign = arguments[1];
-        const index = arguments[2];
+        const child_id = arguments[1];
+        const sign = arguments[2];
 
         let new_state = this.state.items.slice();
-        let temp = new_state[parent_id][index];
+        let temp;
+        let index;
+
+        for(let i = 0; i < new_state[parent_id].length; i += 1){
+            if(new_state[parent_id][i].child_id === child_id){
+                temp = new_state[parent_id][i];
+                index = i;
+            }
+        }
+
         let r = ticktack.forward_time(temp.count, sign);
         temp.count = r;
 
         if(r < 0){
+            clearInterval(new_state[parent_id][index].interval_id);
             new_state[parent_id].splice(index, 1);
         }
+
+        this.setState(()=>({
+            items: new_state
+        }));
+    }
+    set_interval_id(){
+        const parent_id = arguments[0];
+        const child_id = arguments[1];
+        const intervalId = arguments[2];
+        
+        let new_state = this.state.items.slice();
+        let index;
+        let temp;
+
+        for(let i = 0; i < new_state[parent_id].length; i += 1){
+            if(new_state[parent_id][i].child_id === child_id){
+                temp = new_state[parent_id][i];
+                index = i;
+            }
+        }
+
+        temp.interval_id = intervalId;
 
         this.setState(()=>({
             items: new_state
