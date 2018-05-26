@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import My from "../my.js";
-
-let my = new My("four");
+import ticktack from "../modules/index";
 
 export default class TimerInput extends React.Component{
     constructor(props){
@@ -12,7 +10,7 @@ export default class TimerInput extends React.Component{
 
     // }
     render(){
-        const correct_count = my.display(this.props.count);
+        const correct_count = ticktack.display(this.props.count);
         return (
             <div className="timer-input">
                 <form 
@@ -23,7 +21,7 @@ export default class TimerInput extends React.Component{
                     <input 
                         type="text"
                         value={correct_count}
-                        readOnly
+                        onChange={this.props.handle_change}
                     />
                     <input 
                         type="submit" 
