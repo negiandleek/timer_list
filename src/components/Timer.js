@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import ticktack from "../modules/index";
 
-
 export default class Timer extends React.Component{
     constructor(props){
         super(props);
@@ -11,6 +10,7 @@ export default class Timer extends React.Component{
         this.start();
     }
     render(){
+        console.log(this.props)
         const correct_count = ticktack.display(this.props.data.count);
         return (
             <div className="timer">
@@ -31,21 +31,21 @@ export default class Timer extends React.Component{
             props.sign
         ), 1000);
 
-        this.props.set_interval_id(
-            props.parent_id,
-            props.child_id,
-            interval
-        );
+        // this.props.set_interval_id(
+        //     props.parent_id,
+        //     props.child_id,
+        //     interval
+        // );
     }
     stop(){
         clearInterval(this.props.data.interval_id);
     }
 }
 
-Timer.propTypes = {
-    count: PropTypes.number,
-    data: PropTypes.shape({
-        parent_id: PropTypes.number,
-        child_id: PropTypes.number
-    })
-};
+// Timer.propTypes = {
+//     count: PropTypes.number,
+//     data: PropTypes.shape({
+//         parent_id: PropTypes.number,
+//         child_id: PropTypes.number
+//     })
+// };

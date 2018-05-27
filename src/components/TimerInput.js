@@ -2,38 +2,47 @@ import React from "react";
 import PropTypes from "prop-types";
 import ticktack from "../modules/index";
 
-export default class TimerInput extends React.Component{
-    constructor(props){
-        super(props);
-    }
-    // getDerivedStateFromProps(nextProp, prevState){
+const TimerInput = (props) => {
+    let for_display = ticktack.display(props.form.count);
 
-    // }
-    render(){
-        const correct_count = ticktack.display(this.props.count);
-        return (
-            <div className="timer-input">
-                <form 
-                    className="timer-input__form"
-                    action="javascript:void(0)"
-                    onSubmit={this.props.handle_submit}
-                >
-                    <input 
-                        type="text"
-                        value={correct_count}
-                        onChange={this.props.handle_change}
-                    />
-                    <input 
-                        type="submit" 
-                        value="add"
-                    />
-                </form>
-            </div>
-        )
+    function handle_change(e){
+        const undisp = ticktack.undisplay(e.target.value);
+        const result = ticktack.shift_time_to_input(props.form.count, undisp);
+        return result;
     }
+
+    return (
+        <div className="timer-input">
+            <form 
+                className="timer-input__form"
+                action="javascript:void(0)"
+                onSubmit={() => props.add_timer({
+                    count: props.form.count,
+                    parent_id: props.form.type,
+                    sign: Number(props.form.sign) === 0? 1: -1
+                })}
+            >
+                <input 
+                    type="text"
+                    value={for_display}
+                    onChange={(e) => {
+                        props.change_input(handle_change(e))
+                    }}
+                />
+                <input 
+                    type="submit" 
+                    value="add"
+                />
+            </form>
+        </div>
+    )
 }
 
 TimerInput.propTypes = {
-    count: PropTypes.string.isRequired,
-    type: PropTypes.number.isRequired
+    form: PropTypes.shape({
+        count: PropTypes.string.isRequired,
+        type: PropTypes.number.isRequired
+    })
 }
+
+export default TimerInput;
