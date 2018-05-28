@@ -5,11 +5,12 @@ export const add_timer = (payload) => ({
     payload: payload
 });
 
-export const foward_timer = (count, parentId, childId) => ({
-    type: "FOWARD_TIMER",
+export const update_timer = (parentId, childId, count) => ({
+    type: "UPDATE_TIMER",
     payload: {
         parent_id: parentId,
-        child_id: childId
+        child_id: childId,
+        count
     }
 });
 
@@ -30,7 +31,7 @@ export const init_input = () => ({
 
 export const TodoActions = {
     ADD_TIMER: "ADD_TIMER",
-    FOWARD_TIMER: "FOWARD_TIMER",
+    UPDATE_TIMER: "UPDATE_TIMER",
     CHANGE_INPUT: "CHANGE_INPUT",
     INIT_INPUT: "INIT_INPUT"
 };

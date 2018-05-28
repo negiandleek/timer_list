@@ -19,7 +19,7 @@ const TimerInput = (props) => {
                 onSubmit={() => props.add_timer({
                     count: props.form.count,
                     parent_id: props.form.type,
-                    sign: Number(props.form.sign) === 0? 1: -1
+                    sign: Number(props.form.count) === 0? 1: -1
                 })}
             >
                 <input 
