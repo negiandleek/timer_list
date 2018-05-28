@@ -9,7 +9,7 @@ const form = (state = initial_state, action) => {
             new_state.count = action.payload.count;
             return new_state;
             
-        case "INIT_TIME":
+        case "INIT_INPUT":
             return {
                 count: "0000",
                 type: 0

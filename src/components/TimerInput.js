@@ -11,16 +11,21 @@ const TimerInput = (props) => {
         return result;
     }
 
+    function handle_submit(){
+        props.add_timer({
+            count: props.form.count,
+            parent_id: props.form.type,
+            sign: Number(props.form.count) === 0? 1: -1
+        })
+        props.init_input();
+    }
+
     return (
         <div className="timer-input">
             <form 
                 className="timer-input__form"
                 action="javascript:void(0)"
-                onSubmit={() => props.add_timer({
-                    count: props.form.count,
-                    parent_id: props.form.type,
-                    sign: Number(props.form.count) === 0? 1: -1
-                })}
+                onSubmit={handle_submit.bind(this)}
             >
                 <input 
                     type="text"
