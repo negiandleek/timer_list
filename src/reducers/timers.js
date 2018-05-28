@@ -17,26 +17,38 @@ function find_index_of_child_id(state, parent_id, child_id){
 const timers = (state = initial_state, action) => {
     switch(action.type){
         case "ADD_TIMER":
-            new_state =  state.slice();
+            new_state = state.slice();
             payload = action.payload;
-            payload.setInterval = "";
+            payload.interval_id = 0;
             payload.child_id = child_id++;
             new_state[payload.parent_id].push(action.payload);
             return new_state;
 
         case "DELETE_TIMER":
-            clearInterval(state[parent_id][index].interval_id);
-            new_state = this.state.slice();
-            return new_state[parent_id].splice(index, 1);
+            payload = action.payload;
+            index = find_index_of_child_id(state, payload.parent_id, payload.child_id);
+            clearInterval(state[payload.parent_id][index].interval_id);
+            new_state = state.slice();
+            new_state[payload.parent_id].splice(index, 1);
+            return new_state;
 
         case "UPDATE_TIMER":
-            payload = action.payload;   
+            payload = action.payload;
             index = find_index_of_child_id(state, payload.parent_id, payload.child_id);
             
             new_state = state.slice();
             new_state[payload.parent_id][index].count = payload.count;
 
             return new_state;
+
+        case "SET_INTERVAL":
+            payload = action.payload;
+            index = find_index_of_child_id(state, payload.parent_id, payload.child_id);
+            new_state = state.slice();
+            new_state[payload.parent_id][index].interval_id = payload.interval_id;
+            
+            return new_state;
+
         default:
             return state;
     }

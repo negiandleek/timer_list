@@ -5,9 +5,6 @@ import ticktack from "../modules/index";
 export default class Timer extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            interval_id: ""
-        };
     }
     componentDidMount(){
         this.start();
@@ -26,21 +23,33 @@ export default class Timer extends React.Component{
     }
     tick(intervalId){
         const props = this.props.data;
-        const interval_id = intervalId? intervalId: this.state.interval_id;
         const forwarded_time = ticktack.forward_time(props.count, props.sign * 100);
-        this.props.update_timer(
-            props.parent_id,
-            props.child_id,
-            forwarded_time
-        );
+        if(Number(forwarded_time) < 0){
+            this.props.delete_timer(
+                props.parent_id,
+                props.child_id
+            );
+        }else{
+            this.props.update_timer(
+                props.parent_id,
+                props.child_id,
+                forwarded_time
+            );
+        }
     }
     start(){
-        if(this.state.interval)return;
+        const props = this.props;
+        const data = this.props.data;
+        if(props.interval)return;
         const interval = setInterval(() => this.tick(), 1000);
-        this.setState({interval_id: interval})
+        props.set_interval(
+            data.parent_id,
+            data.child_id,
+            interval    
+        );
     }
     stop(){
-        clearInterval(this.state.interval_id);
+        cleaInterval(this.props.data.interval_id);
     }
 }
 

@@ -5,6 +5,15 @@ export const add_timer = (payload) => ({
     payload: payload
 });
 
+export const delete_timer = (parentId, childId, intervalId) => ({
+    type: "DELETE_TIMER",
+    payload: {
+        parent_id: parentId,
+        child_id: childId,
+        interval_id: intervalId
+    }
+});
+
 export const update_timer = (parentId, childId, count) => ({
     type: "UPDATE_TIMER",
     payload: {
@@ -13,6 +22,15 @@ export const update_timer = (parentId, childId, count) => ({
         count
     }
 });
+
+export const set_interval = (parentId, childId, intervalId) => ({
+    type: "SET_INTERVAL",
+    payload: {
+        parent_id: parentId,
+        child_id: childId,
+        interval_id: intervalId
+    }
+})
 
 export const change_input = (count) => ({
     type: "CHANGE_INPUT",
