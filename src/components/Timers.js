@@ -8,14 +8,11 @@ const Timers = (props) => {
         <ul>
             {props.items.map((item, i) => (
                 <li key={"timer-" + props.index + "-" + i}>
-                    <Timer 
-                        // index = {i}
+                    <Timer
                         data={item}
                         update_timer={props.update_timer}
                         delete_timer={props.delete_timer}
                         set_interval={props.set_interval}
-                        // tick={props.tick}
-                        // set_interval_id = {props.set_interval_id}
                     />
                 </li>
             ))}

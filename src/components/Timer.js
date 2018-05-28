@@ -49,14 +49,14 @@ export default class Timer extends React.Component{
         );
     }
     stop(){
-        cleaInterval(this.props.data.interval_id);
+        clearInterval(this.props.data.interval_id);
     }
 }
 
-// Timer.propTypes = {
-//     count: PropTypes.number,
-//     data: PropTypes.shape({
-//         parent_id: PropTypes.number,
-//         child_id: PropTypes.number
-//     })
-// };
+Timer.propTypes = {
+    count: PropTypes.number,
+    data: PropTypes.shape({
+        parent_id: PropTypes.number,
+        child_id: PropTypes.number
+    })
+};

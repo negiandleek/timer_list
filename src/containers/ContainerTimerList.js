@@ -1,8 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import Timers from "../components/Timers";
-import {update_timer, delete_timer, set_interval} from "../actions";
-
+import actions from "../actions";
 
 // timer_list component -> timersに変更　App.js参照
 const mapStateToProps = state => ({
@@ -10,9 +9,9 @@ const mapStateToProps = state => ({
 });
   
 const mapDispatchToProps = dispatch => ({
-    update_timer: (parentId, childId, count) => dispatch(update_timer(parentId, childId, count)),
-    delete_timer: (parentId, childId, inervalId) => dispatch(delete_timer(parentId, childId, inervalId)),
-    set_interval: (parentId, childId, intervalId) => dispatch(set_interval(parentId, childId, intervalId))
+    update_timer: (parentId, childId, count) => dispatch(actions.update_timer(parentId, childId, count)),
+    delete_timer: (parentId, childId, inervalId) => dispatch(actions.delete_timer(parentId, childId, inervalId)),
+    set_interval: (parentId, childId, intervalId) => dispatch(actions.set_interval(parentId, childId, intervalId))
 });
 
 const TimerList = (props) => {

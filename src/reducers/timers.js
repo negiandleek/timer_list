@@ -3,6 +3,7 @@ let child_id = 0;
 let new_state;
 let payload;
 let index = -1;
+
 function find_index_of_child_id(state, parent_id, child_id){
     let index = -1;
     for(let i = 0; i < state[parent_id].length; i += 1){

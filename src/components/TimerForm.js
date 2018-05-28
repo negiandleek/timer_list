@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ticktack from "../modules/index";
 
-const TimerInput = (props) => {
+const TimerForm = (props) => {
     let for_display = ticktack.display(props.form.count);
 
     function handle_change(e){
@@ -43,11 +43,11 @@ const TimerInput = (props) => {
     )
 }
 
-TimerInput.propTypes = {
+TimerForm.propTypes = {
     form: PropTypes.shape({
         count: PropTypes.string.isRequired,
         type: PropTypes.number.isRequired
     })
 }
 
-export default TimerInput;
+export default TimerForm;
