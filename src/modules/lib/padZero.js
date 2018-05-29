@@ -9,6 +9,6 @@ export default function pad_zero(value, range = 2){
         }
         return value;
     }else{
-        return (this.pad_zero({temp: value}, range)).temp;
+        return (pad_zero({temp: value}, range)).temp;
     }
 }

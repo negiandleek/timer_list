@@ -14,6 +14,8 @@ import convert_time_to_milli from "./lib/convertTimeToMilli";
 import display from "./lib/display";
 import forward_time from "./lib/forwardTime";
 import pad_zero from "./lib/padZero";
+import print from "./lib/print";
+import put_time_base_ten from "./lib/putTimeBaseTen";
 import shift_time_to_input from "./lib/shiftTimeToInput";
 import undisplay from "./lib/undisplay";
 
@@ -26,6 +28,8 @@ const ticktack = {
     display,
     forward_time,
     pad_zero,
+    print,
+    put_time_base_ten,
     shift_time_to_input,
     undisplay
 }
