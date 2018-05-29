@@ -6,12 +6,13 @@ import convert_str_to_time from "./convertStrToTime";
 import convert_milli_to_time from "./convertMilliToTime";
 import pad_zero from "./padZero";
 
-export default function forward_time(value, num = 100){
-    this.is_time(value)
+export default function put_time_base_time(value, num = 100){
+    is_time(value)
 
     // if(!_.isNumber(num) || isNaN(value)){
     //     return false;
     // }
+
     let convertd_time = convert_str_to_time(value);
     let millis = convert_time_to_milli(convertd_time);
     let forwarded_date = pad_zero(convert_milli_to_time(Number(millis) + num), 2);

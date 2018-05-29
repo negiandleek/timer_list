@@ -3,3 +3,5 @@ export default function print(){
         console.log(arguments[i])
     }
 }
+// temp
+window.print = print;
