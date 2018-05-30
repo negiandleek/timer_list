@@ -7,7 +7,7 @@
 import alpha from "./lib/alpha";
 import is_time from "./lib/isTime";
 import is_tommorow from "./lib/isTommorow";
-import concatenate_time from "./lib/concatenateTime";
+import concatenate_time_to_str from "./lib/concatenateTimeToStr";
 import convert_alarm_to_time_left from "./lib/convertAlarmToTimeLeft";
 import convert_milli_to_time from "./lib/convertMilliToTime";
 import convert_str_to_time from "./lib/convertStrToTime";
@@ -25,7 +25,7 @@ const ticktack = {
     alpha,
     is_time,
     is_tommorow,
-    concatenate_time,
+    concatenate_time_to_str,
     convert_alarm_to_time_left,
     convert_milli_to_time,
     convert_time_to_milli,
