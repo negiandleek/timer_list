@@ -13,9 +13,9 @@ import convert_milli_to_time from "./lib/convertMilliToTime";
 import convert_str_to_time from "./lib/convertStrToTime";
 import convert_time_to_milli from "./lib/convertTimeToMilli";
 import display from "./lib/display";
+import echo from "./lib/echo";
 import generate_alarm from "./lib/generateAlarm";
 import pad_zero from "./lib/padZero";
-import print from "./lib/print";
 import put_time_base_time from "./lib/putTimeBaseTime";
 import put_time_base_ten from "./lib/putTimeBaseTen";
 import shift_time_to_input from "./lib/shiftTimeToInput";
@@ -31,9 +31,9 @@ const ticktack = {
     convert_time_to_milli,
     convert_str_to_time,
     display,
+    echo,
     generate_alarm,
     pad_zero,
-    print,
     put_time_base_time,
     put_time_base_ten,
     shift_time_to_input,
