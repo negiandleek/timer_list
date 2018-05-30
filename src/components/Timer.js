@@ -23,8 +23,11 @@ export default class Timer extends React.Component{
     }
     tick(intervalId){
         const props = this.props.data;
-        const forwarded_time = ticktack.forward_time(props.count, props.sign * 100);
-        if(Number(forwarded_time) < 0){
+        let diff = props.date.getTime() - new Date().getTime();
+        let time = ticktack.convert_milli_to_time(diff);
+        let count = ticktack.concatenate_time_to_str(time);
+        // TODO: マイナスは000000で表示。deleteが押されるまでそのまま
+        if(Number(count) < 0){
             this.props.delete_timer(
                 props.parent_id,
                 props.child_id
@@ -33,7 +36,7 @@ export default class Timer extends React.Component{
             this.props.update_timer(
                 props.parent_id,
                 props.child_id,
-                forwarded_time
+                count
             );
         }
     }

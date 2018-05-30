@@ -1,24 +1,36 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ticktack from "../modules/index";
+const reg = /[0-9]:/g;
 
 const TimerForm = (props) => {
     let for_display = ticktack.display(props.form.count);
 
     function handle_change(e){
+        // TODO:0-9,:
+        // if(e.target.value.test(/[0-9]|:/,g)){
+            
+        // }
         const undisp = ticktack.undisplay(e.target.value);
         const result = ticktack.shift_time_to_input(props.form.count, undisp);
         return result;
     }
 
-    function handle_click(){
-        // TODO: alarm
-        
-        // props.add_timer({
-        //     count: props.form.count,
-        //     parent_id: props.form.type,
-        //     sign: Number(props.form.count) === 0? 1: -1
-        // })
+    function handle_click(isAlarm){
+        if(!Number(props.form.count)){
+            return void 0;
+        }
+        let date = ticktack.generate_in_date_time(props.form.count, isAlarm);
+        let diff = date - new Date().getTime();
+        let time = ticktack.convert_milli_to_time(diff);
+        time = ticktack.pad_zero(time, 2);
+        let count = ticktack.concatenate_time_to_str(time).slice(2);
+        props.add_timer({
+            count: count,
+            date: date,
+            parent_id: props.form.type,
+            sign: Number(props.form.count) === 0? 1: -1
+        })
         props.init_input();
     }
 
@@ -38,12 +50,12 @@ const TimerForm = (props) => {
                 <input 
                     type="button" 
                     value="count down"
-                    onClick={handle_click.bind(this)}
+                    onClick={handle_click.bind(this, false)}
                 />
                 <input 
                     type="button"
                     value="alarm"
-                    // onClick={handle_click.bind(this)}
+                    onClick={handle_click.bind(this, true)}
                 />
             </form>
         </div>

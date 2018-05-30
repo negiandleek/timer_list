@@ -3,6 +3,7 @@ import is_time from "./isTime";
 const reg = /[0-9]{0}(?=(?:[0-9]{2})+$)/;
 const order = ["hours", "minutes", "seconds", "millis"];
 
+// FIX:00:00:00 end up "tomorrow"
 export default function is_tomorrow(value){
     is_time(value);
 
