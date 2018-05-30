@@ -41,3 +41,6 @@ const ticktack = {
 }
 
 export default ticktack;
+
+// TODO:
+// アラームの時は上から、タイマーの時は下から、ただしミリを除いてsliceする処理が必要
