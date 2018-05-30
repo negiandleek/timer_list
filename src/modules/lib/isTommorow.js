@@ -12,12 +12,12 @@ export default function is_tomorrow(value){
     now.minutes = now.date.getMinutes();
     now.seconds = now.date.getSeconds();
     now.millis = now.date.getMilliseconds();
-    let target_date = value.split(reg).map(Number);
-    let is_tomorrow = false;
-    for(let i = 0; i < target_date.length; i += 1){
-        console.log(now[order[i]], target_date[i])
-        if(now[order[i]] > target_date[i]){
-            is_tomorrow = true;
+    let feature_date = value.split(reg).map(Number);
+    let is_tomorrow = true;
+    for(let i = 0; i < feature_date.length; i += 1){
+        echo(now[order[i]], feature_date[i], now[order[i]] > feature_date[i]);
+        if(now[order[i]] < feature_date[i]){
+            is_tomorrow = false;
             break;
         }
     }

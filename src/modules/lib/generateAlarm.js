@@ -26,5 +26,3 @@ export default function generate_alarm(value){
 
     convert_alarm_to_time_left(alarm);
 }
-
-generate_alarm("1900");
