@@ -1,6 +1,6 @@
-const h = 60 * 60 * 100;
-const m = 60 * 100;
-const s = 100
+const h = 60 * 60 * 1000;
+const m = 60 * 1000;
+const s = 1000
 
 export default function convert_milli_to_time(value){
     let result = value;

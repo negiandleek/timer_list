@@ -14,7 +14,7 @@ import convert_str_to_time from "./lib/convertStrToTime";
 import convert_time_to_milli from "./lib/convertTimeToMilli";
 import display from "./lib/display";
 import echo from "./lib/echo";
-import generate_alarm from "./lib/generateAlarm";
+import generate_in_date_time from "./lib/generateInDateTime";
 import pad_zero from "./lib/padZero";
 import put_time_base_time from "./lib/putTimeBaseTime";
 import put_time_base_ten from "./lib/putTimeBaseTen";
@@ -32,7 +32,7 @@ const ticktack = {
     convert_str_to_time,
     display,
     echo,
-    generate_alarm,
+    generate_in_date_time,
     pad_zero,
     put_time_base_time,
     put_time_base_ten,

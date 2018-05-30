@@ -43,7 +43,7 @@ const TimerForm = (props) => {
                 <input 
                     type="button"
                     value="alarm"
-                    onClick={handle_click.bind(this)}
+                    // onClick={handle_click.bind(this)}
                 />
             </form>
         </div>

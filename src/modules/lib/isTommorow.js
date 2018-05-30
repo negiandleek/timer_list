@@ -15,7 +15,6 @@ export default function is_tomorrow(value){
     let feature_date = value.split(reg).map(Number);
     let is_tomorrow = true;
     for(let i = 0; i < feature_date.length; i += 1){
-        echo(now[order[i]], feature_date[i], now[order[i]] > feature_date[i]);
         if(now[order[i]] < feature_date[i]){
             is_tomorrow = false;
             break;

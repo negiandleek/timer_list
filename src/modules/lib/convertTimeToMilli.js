@@ -1,7 +1,7 @@
 const based = {
-    "hours": 60 * 60 * 100,
-    "minutes": 60 * 100,
-    "seconds": 100,
+    "hours": 60 * 60 * 1000,
+    "minutes": 60 * 1000,
+    "seconds": 1000,
 };
 const based_keys = Object.keys(based).map((key)=>key);
 

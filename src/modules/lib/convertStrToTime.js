@@ -6,7 +6,7 @@ export default function convert_str_to_time(value){
 
     // hour,minute,second;
     let time = [0,0,0];
-    let based = [60 * 60 * 100, 60 * 100, 100];
+    let based = [60 * 60 * 1000, 60 * 1000, 1000];
     let result = 0;
 
     function convert(time, startIndex = -2, count = 0){
