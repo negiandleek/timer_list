@@ -3,6 +3,15 @@ export const add_timer = (payload) => ({
     payload: payload
 });
 
+// export const clear_timer = (parentId, childId, intervalId) =>({
+//     type: "CLEAR_TIMER",
+//     payload: {
+//         parent_id: parentId,
+//         child_id: childId,
+//         interval_id: intervalId
+//     }
+// });
+
 export const delete_timer = (parentId, childId, intervalId) => ({
     type: "DELETE_TIMER",
     payload: {

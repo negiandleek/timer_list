@@ -5,6 +5,9 @@ import ticktack from "../modules/index";
 export default class Timer extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            is_stopped: false
+        }
     }
     componentDidMount(){
         this.start();
@@ -17,6 +20,16 @@ export default class Timer extends React.Component{
                 <div className="timer__btns">
                     <input type="button" value="start" onClick={this.start.bind(this)} />
                     <input type="button" value="stop" onClick={this.stop.bind(this)} />
+                    {
+                        this.state.is_stopped?
+                            <input type="button" value="delete" onClick={()=>{
+                                this.props.delete_timer(
+                                    this.props.data.parent_id, 
+                                    this.props.data.child_id
+                                )
+                            }} />:
+                            null
+                    }
                 </div>
             </div>
         )
@@ -36,10 +49,10 @@ export default class Timer extends React.Component{
                 count
             );
         }else{
-            this.props.delete_timer(
-                props.parent_id,
-                props.child_id
-            );
+            clearInterval(this.props.data.interval_id);
+            this.setState({
+                is_stopped: !this.state.is_stopped
+            })
         }
     }
     start(){
