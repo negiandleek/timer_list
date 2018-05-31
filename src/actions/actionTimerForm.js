@@ -8,8 +8,7 @@ export const change_input = (count) => ({
 export const init_input = () => ({
     type: "INIT_INPUT",
     payload: {
-        count: "0000",
-        type: 0
+        count: "0000"
     }
 })
 

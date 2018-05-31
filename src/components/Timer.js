@@ -25,7 +25,9 @@ export default class Timer extends React.Component{
         const props = this.props.data;
         let diff = props.date.getTime() - new Date().getTime();
         let time = ticktack.convert_milli_to_time(diff);
+        ticktack.pad_zero(time, 2);
         let count = ticktack.concatenate_time_to_str(time);
+        count = ticktack.slice_time_of_string(count, 4, props.type);
         // TODO: マイナスは000000で表示。deleteが押されるまでそのまま
         if(Number(count) < 0){
             this.props.delete_timer(

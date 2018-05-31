@@ -19,6 +19,7 @@ import pad_zero from "./lib/padZero";
 import put_time_base_time from "./lib/putTimeBaseTime";
 import put_time_base_ten from "./lib/putTimeBaseTen";
 import shift_time_to_input from "./lib/shiftTimeToInput";
+import slice_time_of_string from "./lib/sliceTimeOfString";
 import undisplay from "./lib/undisplay";
 
 const ticktack = {

@@ -19,8 +19,8 @@ export default function convert_milli_to_time(value){
     result = result - (seconds * s);
 
     return {
-        hours: pad_zero(hours, 2),
-        minutes: pad_zero(minutes, 2),
-        seconds: pad_zero(seconds, 2)
+        hours,
+        minutes,
+        seconds
     };
 }
