@@ -21,12 +21,29 @@ export const delete_timer = (parentId, childId, intervalId) => ({
     }
 });
 
-export const update_timer = (parentId, childId, count) => ({
+export const update_timer = (parentId, childId, count, date) => ({
     type: "UPDATE_TIMER",
     payload: {
         parent_id: parentId,
         child_id: childId,
-        count
+        count,
+        date
+    }
+});
+
+export const stop_timer = (parent_id, child_id) => ({
+    type: "STOP_TIMER",
+    payload:{
+        parent_id,
+        child_id
+    }
+});
+
+export const resume_timer = (parent_id, child_id) => ({
+    type: "RESUME_TIMER",
+    payload: {
+        parent_id,
+        child_id
     }
 });
 

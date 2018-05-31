@@ -15,13 +15,14 @@ const timers = (state = initial_state, action) => {
     let new_state;
     let payload;
     let index;
-    
+
     switch(action.type){
         case "ADD_TIMER":
             new_state = state.slice();
-            payload = action.payload;
+            payload = action.payload; 
             payload.interval_id = 0;
             payload.child_id = Math.random().toString(36).substr(2, 9);
+            payload.stoped_flag = 0;
             new_state[payload.parent_id].push(action.payload);
             return new_state;
 
@@ -38,7 +39,22 @@ const timers = (state = initial_state, action) => {
             
             new_state = state.slice();
             new_state[payload.parent_id][index].count = payload.count;
+            new_state[payload.parent_id][index].date = payload.date;
 
+            return new_state;
+
+        case "STOP_TIMER":
+            payload = action.payload;
+            index = find_index_of_child_id(state, payload.parent_id, payload.child_id);
+            new_state = state.slice();
+            new_state[payload.parent_id][index].stoped_flag = true;            
+            return new_state;
+
+        case "RESUME_TIMER":
+            payload = action.payload;
+            index = find_index_of_child_id(state, payload.parent_id, payload.child_id);
+            new_state = state.slice();
+            new_state[payload.parent_id][index].stoped_flag = false;    
             return new_state;
 
         case "SET_INTERVAL":
