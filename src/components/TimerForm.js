@@ -26,7 +26,7 @@ const TimerForm = (props) => {
         let time = ticktack.convert_milli_to_time(diff);
         ticktack.pad_zero(time, 2);
         time = ticktack.concatenate_time_to_str(time);
-        let count = ticktack.slice_time_of_string(time, 4, isAlarm);
+        let count = ticktack.slice_time_of_string(time, 4 + (isAlarm * 2), props.type);
         props.add_timer({
             count: count,
             date: date,
