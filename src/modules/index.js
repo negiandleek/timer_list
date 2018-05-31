@@ -38,10 +38,12 @@ const ticktack = {
     put_time_base_time,
     put_time_base_ten,
     shift_time_to_input,
+    slice_time_of_string,
     undisplay
 }
 
 export default ticktack;
 
 // TODO:
-// アラームの時は上から、タイマーの時は下から、ただしミリを除いてsliceする処理が必要
+// 必要なタイムを自由に取得できるように拡張する
+// hours, minutes, seconds, millis対応
