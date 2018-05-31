@@ -20,23 +20,21 @@ export default class Timer extends React.Component{
                 <div className="timer__btns">
                     <input type="button" value="start" onClick={this.start.bind(this)} />
                     <input type="button" value="stop" onClick={this.stop.bind(this)} />
-                    {
-                        this.state.is_stopped?
-                            <input type="button" value="delete" onClick={()=>{
-                                this.props.delete_timer(
-                                    this.props.data.parent_id, 
-                                    this.props.data.child_id
-                                )
-                            }} />:
-                            null
-                    }
+                    <input type="button" value="delete" onClick={()=>{
+                        clearInterval(this.props.data.interval_id)
+                        this.props.delete_timer(
+                            this.props.data.parent_id, 
+                            this.props.data.child_id
+                        )
+                    }} />
                 </div>
             </div>
         )
     }
     tick(intervalId){
         const props = this.props.data;
-        let diff = props.date.getTime() - new Date().getTime();
+        let date = (props.date instanceof Date)? props.date: new Date(props.date);
+        let diff = date.getTime() - new Date().getTime();
         if(diff > 0){
             let time = ticktack.convert_milli_to_time(diff);
             ticktack.pad_zero(time, 2);
@@ -57,7 +55,6 @@ export default class Timer extends React.Component{
             this.setState({
                 is_stopped: !this.state.is_stopped
             })
-            clearInterval(props.interval_id);
         }
     }
     start(){
@@ -68,7 +65,7 @@ export default class Timer extends React.Component{
         props.set_interval(
             data.parent_id,
             data.child_id,
-            interval    
+            interval
         );
     }
     stop(){
@@ -80,6 +77,6 @@ Timer.propTypes = {
     count: PropTypes.number,
     data: PropTypes.shape({
         parent_id: PropTypes.number,
-        child_id: PropTypes.number
+        child_id: PropTypes.string
     })
 };
