@@ -49,10 +49,15 @@ export default class Timer extends React.Component{
                 count
             );
         }else{
-            clearInterval(this.props.data.interval_id);
+            let props = this.props.data;
+            let zero = "0".repeat(4 + (props.type * 2));
+
+            this.props.update_timer(props.parent_id, props.child_id, zero);
+
             this.setState({
                 is_stopped: !this.state.is_stopped
             })
+            clearInterval(props.interval_id);
         }
     }
     start(){
