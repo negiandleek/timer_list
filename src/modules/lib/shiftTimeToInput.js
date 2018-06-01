@@ -1,4 +1,4 @@
-import is_time from "./isTime";
+import is_time_of_string from "./isTimeOfString";
 
 export default function shift_time_to_input(prev, next){
     let r;

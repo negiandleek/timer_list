@@ -1,11 +1,11 @@
-import is_time from "./isTime";
+import is_time_of_string from "./isTimeOfString";
 
 const reg = /[0-9]{0}(?=(?:[0-9]{2})+$)/;
 const order = ["hours", "minutes", "seconds", "millis"];
 
 // FIX:00:00:00 end up "tomorrow"
 export default function is_tomorrow(value){
-    is_time(value);
+    is_time_of_string(value);
 
     let now = {};
     now.date = new Date();

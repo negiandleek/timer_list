@@ -5,8 +5,6 @@
 }
 */
 import alpha from "./lib/alpha";
-import is_time from "./lib/isTime";
-import is_tommorow from "./lib/isTommorow";
 import concatenate_time_to_str from "./lib/concatenateTimeToStr";
 import convert_alarm_to_time_left from "./lib/convertAlarmToTimeLeft";
 import convert_milli_to_time from "./lib/convertMilliToTime";
@@ -15,6 +13,9 @@ import convert_time_to_milli from "./lib/convertTimeToMilli";
 import display from "./lib/display";
 import echo from "./lib/echo";
 import generate_in_date_time from "./lib/generateInDateTime";
+import is_time_of_object from "./lib/isTimeofObject";
+import is_time_of_string from "./lib/isTimeOfString";
+import is_tommorow from "./lib/isTommorow";
 import pad_zero from "./lib/padZero";
 import put_time_base_time from "./lib/putTimeBaseTime";
 import put_time_base_ten from "./lib/putTimeBaseTen";
@@ -24,8 +25,6 @@ import undisplay from "./lib/undisplay";
 
 const ticktack = {
     alpha,
-    is_time,
-    is_tommorow,
     concatenate_time_to_str,
     convert_alarm_to_time_left,
     convert_milli_to_time,
@@ -34,6 +33,9 @@ const ticktack = {
     display,
     echo,
     generate_in_date_time,
+    is_time_of_object,
+    is_time_of_string,
+    is_tommorow,
     pad_zero,
     put_time_base_time,
     put_time_base_ten,

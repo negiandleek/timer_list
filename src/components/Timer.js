@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ticktack from "../modules/index";
-import is_time from "../modules/lib/isTime";
 import * as utils from "../utils"
 
 export default class Timer extends React.Component{

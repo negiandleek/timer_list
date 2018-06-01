@@ -1,8 +1,8 @@
-import is_time from "./isTime";
+import is_time_of_string from "./isTimeOfString";
 import convert_milli_time from "./convertMilliToTime";
 
 export default function convert_str_to_time(value){
-    is_time(value)
+    is_time_of_string(value)
 
     // hour,minute,second;
     let time = [0,0,0];

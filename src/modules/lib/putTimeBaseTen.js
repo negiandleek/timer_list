@@ -1,4 +1,4 @@
-import is_time from "./isTime";
+import is_time_of_string from "./isTimeOfString";
 import pad_zero from "./padZero";
 
 const reg = /[0-9]{0}(?=(?:[0-9]{2})+$)/;
@@ -6,7 +6,7 @@ const down_base = [99,60,60,1000];
 const up_base = [100,100,100,1000];
 
 export default function put_time_base_ten(value, str){
-    is_time(value)
+    is_time_of_string(value)
 
     let origin = value.split(reg).map(Number);
     let origin_digits = Math.ceil(value.length / 2);

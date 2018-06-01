@@ -1,5 +1,5 @@
 import _ from "underscore";
-import is_time from "./isTime";
+import is_time_of_string from "./isTimeOfString";
 import concatenate_time_to_str from "./concatenateTimeToStr";
 import convert_time_to_milli from "./convertTimeToMilli";
 import convert_str_to_time from "./convertStrToTime";
@@ -7,7 +7,7 @@ import convert_milli_to_time from "./convertMilliToTime";
 import pad_zero from "./padZero";
 
 export default function put_time_base_time(value, num = 100){
-    is_time(value)
+    is_time_of_string(value)
 
     // if(!_.isNumber(num) || isNaN(value)){
     //     return false;

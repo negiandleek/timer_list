@@ -2,9 +2,7 @@ import _ from "underscore";
 
 const reg = /[^0-9]/g;
 
-// TODO:is_timeは引数をすべて調べる
-// milli対応
-export default function is_time(value){
+export default function is_time_of_string_of_string(value){
     if(value == null || typeof value === "undefined"){
         throw new Error("value is null or not defined");
     }
@@ -15,7 +13,7 @@ export default function is_time(value){
         throw new Error("value length must be 2 or 4 or 6");
     }
     if(reg.test(value)){
-        throw new Error("value must be Number of String type")
+        throw new TypeError("value must be Number of String type")
     }
     return true;
 }

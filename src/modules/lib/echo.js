@@ -4,4 +4,4 @@ export default function echo(){
     }
 }
 // temp
-window.echo = echo;
+// window.echo = echo;

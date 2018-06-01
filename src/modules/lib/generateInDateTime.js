@@ -1,5 +1,5 @@
 import alpha from "./alpha";
-import is_time from "./isTime";
+import is_time_of_string from "./isTimeOfString";
 import is_tommorow from "./isTommorow";
 import convert_alarm_to_time_left from "./convertAlarmToTimeLeft";
 import convert_str_to_time from "./convertStrToTime";
@@ -15,7 +15,7 @@ export default function generate_in_date_time(value, alarm=true){
     let in_date_time = new Date();
 
     if(!alarm){
-        is_time(value);
+        is_time_of_string(value);
         let n = convert_str_to_time(value);
         let m = convert_time_to_milli(n);
         in_date_time = new Date(new Date().getTime() + m);
