@@ -1,6 +1,11 @@
-export const add_timer = (payload) => ({
+export const add_timer = (parentId, count, date, type) => ({
     type: "ADD_TIMER",
-    payload: payload
+    payload: {
+        parent_id: parentId,
+        count,
+        date,
+        type
+    }
 });
 
 // export const clear_timer = (parentId, childId, intervalId) =>({
@@ -31,21 +36,13 @@ export const update_timer = (parentId, childId, count, date) => ({
     }
 });
 
-export const stop_timer = (parent_id, child_id) => ({
-    type: "STOP_TIMER",
-    payload:{
-        parent_id,
-        child_id
-    }
-});
-
-export const resume_timer = (parent_id, child_id) => ({
-    type: "RESUME_TIMER",
+export const toggle_timer = (parent_id, child_id) => ({
+    type: "TOGGLE_TIMER",
     payload: {
         parent_id,
         child_id
     }
-});
+})
 
 export const TimerActions = {
     ADD_TIMER: "ADD_TIMER",

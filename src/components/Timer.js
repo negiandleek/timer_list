@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ticktack from "../modules/index";
 import is_time from "../modules/lib/isTime";
+import * as utils from "../utils"
 
 export default class Timer extends React.Component{
     constructor(props){
@@ -37,14 +38,10 @@ export default class Timer extends React.Component{
     }
     tick(){
         const props = this.props.data;
-        let date = (props.date instanceof Date)? props.date: new Date(props.date);
-        let diff = date.getTime() - new Date().getTime();
+        const date = (props.date instanceof Date)? props.date: new Date(props.date);
+        const diff = utils.get_diff_date_and_now(date);
         if(diff > 0){
-            let time = ticktack.convert_milli_to_time(diff);
-            ticktack.pad_zero(time, 2);
-            let count = ticktack.concatenate_time_to_str(time);
-            count = ticktack.slice_time_of_string(count, 4 + (props.type * 2), props.type);
-
+            let count = utils.get_count(diff, props.type);
             this.props.update_timer(
                 props.parent_id,
                 props.child_id,
@@ -53,20 +50,22 @@ export default class Timer extends React.Component{
             );
         }else{
             let props = this.props.data;
-            let zero = "0".repeat(4 + (props.type * 2));
-
-            this.props.update_timer(props.parent_id, props.child_id, zero, null);
-
-            this.props.stop_timer(props.parent_id, props.child_id);
+            this.props.toggle_timer(props.parent_id, props.child_id);
+            this.props.update_timer(
+                props.parent_id,
+                props.child_id,
+                "0".repeat(4 + (props.type * 2)), 
+            );
         }
     }
     start(){
         const props = this.props;
         const data = this.props.data;
-        if(data.stoped_flag){
-            return;
-        }
+        if(data.stoped_flag)return;
         if(props.interval)return;
+        
+        this.tick();
+        
         const interval = setInterval(() => this.tick(), 1000);
         props.set_interval(
             data.parent_id,
@@ -76,28 +75,31 @@ export default class Timer extends React.Component{
     }
     resume(){
         const data = this.props.data;
-        const interval = setInterval(() => this.tick(), 1000);
-        let date = ticktack.generate_in_date_time(data.count, false);
-        let diff = date - new Date().getTime();
-        let time = ticktack.convert_milli_to_time(diff);
-        ticktack.pad_zero(time, 2);
-        time = ticktack.concatenate_time_to_str(time);
-        let count = ticktack.slice_time_of_string(time, 4, false);
+        let date = ticktack.generate_in_date_time(data.count, data.type);
+        let diff = utils.get_diff_date_and_now(date);
+        let count = utils.get_count(date, data.type);
 
-        this.props.update_timer(data.parent_id, data.child_id, count, date);
+        const interval = setInterval(() => this.tick(), 1000);
+        this.props.update_timer(
+            data.parent_id,
+            data.child_id,
+            count,
+            date
+        );
         this.props.set_interval(
             data.parent_id,
             data.child_id,
             interval
         );
-        this.props.resume_timer(data.parent_id, data.child_id);
-
+        this.props.toggle_timer(data.parent_id, data.child_id);
+        
+        this.tick();
     }
     stop(){
         let data = this.props.data;
         clearInterval(data.interval_id);
-        this.props.update_timer(data.parent_id, data.child_id, data.count, null);
-        this.props.stop_timer(data.parent_id, data.child_id);
+        this.props.update_timer(data.parent_id, data.child_id, data.count);
+        this.props.toggle_timer(data.parent_id, data.child_id);
     }
 }
 
@@ -105,6 +107,10 @@ Timer.propTypes = {
     count: PropTypes.number,
     data: PropTypes.shape({
         parent_id: PropTypes.number,
-        child_id: PropTypes.string
+        child_id: PropTypes.string,
+        date: PropTypes.Object,
+        stoped_flag: PropTypes.bool,
+        type: PropTypes.number,
+        interval_id: PropTypes.number
     })
 };

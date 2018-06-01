@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ticktack from "../modules/index";
-import { isArray } from "util";
+import * as utils from "../utils";
 const reg = /[0-9]:/g;
 
 const TimerForm = (props) => {
@@ -21,19 +21,17 @@ const TimerForm = (props) => {
         if(!Number(props.form.count)){
             return void 0;
         }
+        
         let date = ticktack.generate_in_date_time(props.form.count, isAlarm);
-        let diff = date - new Date().getTime();
-        let time = ticktack.convert_milli_to_time(diff);
-        ticktack.pad_zero(time, 2);
-        time = ticktack.concatenate_time_to_str(time);
-        let count = ticktack.slice_time_of_string(time, 4 + (isAlarm? 2: 0), isAlarm);
-        props.add_timer({
-            count: count,
-            date: date,
-            parent_id: props.form.type,
-            sign: Number(props.form.count) === 0? 1: -1,
-            type: isAlarm? 1: 0
-        });
+        let diff = utils.get_diff_date_and_now(date)
+        let count = utils.get_count(diff, isAlarm)
+        
+        props.add_timer(
+            props.form.type, //parent_type
+            count,
+            date,
+            isAlarm? 1: 0 //alarm_flag
+        )
         props.init_input();
     }
 

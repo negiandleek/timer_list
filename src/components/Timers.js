@@ -13,8 +13,7 @@ const Timers = (props) => {
                         update_timer={props.update_timer}
                         delete_timer={props.delete_timer}
                         set_interval={props.set_interval}
-                        stop_timer={props.stop_timer}
-                        resume_timer={props.resume_timer}
+                        toggle_timer={props.toggle_timer}
                     />
                 </li>
             ))}

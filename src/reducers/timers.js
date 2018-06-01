@@ -20,48 +20,69 @@ const timers = (state = initial_state, action) => {
         case "ADD_TIMER":
             new_state = state.slice();
             payload = action.payload; 
-            payload.interval_id = 0;
-            payload.child_id = Math.random().toString(36).substr(2, 9);
-            payload.stoped_flag = 0;
-            new_state[payload.parent_id].push(action.payload);
+            var date = {
+                parent_id: payload.parent_id,
+                count: payload.count,
+                date: payload.date,
+                type: payload.type,
+                interval_id: 0,
+                child_id: Math.random().toString(36).substr(2, 9),
+                stoped_flag: false
+            };
+            new_state[payload.parent_id].push(date);
+            
             return new_state;
 
         case "DELETE_TIMER":
             payload = action.payload;
-            index = find_index_of_child_id(state, payload.parent_id, payload.child_id);
             new_state = state.slice();
-            new_state[payload.parent_id].splice(index, 1);
+            new_state[payload.parent_id] = new_state[payload.parent_id].filter(items => {
+                return items.child_id !== payload.child_id
+            })
+
             return new_state;
 
         case "UPDATE_TIMER":
             payload = action.payload;
-            index = find_index_of_child_id(state, payload.parent_id, payload.child_id);
             
             new_state = state.slice();
-            new_state[payload.parent_id][index].count = payload.count;
-            new_state[payload.parent_id][index].date = payload.date;
+            new_state[payload.parent_id] = new_state[payload.parent_id].map(items => {
+                if(items.child_id !== payload.child_id){
+                    return items
+                }
+                items.count = payload.count;
+                items.date = payload.date? payload.date: items.date;
+                return items;
+            })
 
             return new_state;
 
-        case "STOP_TIMER":
+        case "TOGGLE_TIMER":
             payload = action.payload;
-            index = find_index_of_child_id(state, payload.parent_id, payload.child_id);
-            new_state = state.slice();
-            new_state[payload.parent_id][index].stoped_flag = true;            
-            return new_state;
 
-        case "RESUME_TIMER":
-            payload = action.payload;
-            index = find_index_of_child_id(state, payload.parent_id, payload.child_id);
             new_state = state.slice();
-            new_state[payload.parent_id][index].stoped_flag = false;    
+            new_state[payload.parent_id] = new_state[payload.parent_id].map(items => {
+                if(items.child_id !== payload.child_id){
+                    return items
+                }
+                items.stoped_flag = !items.stoped_flag;
+                items.date = payload.date? payload.date: items.date;
+                return items;
+            });
+
             return new_state;
 
         case "SET_INTERVAL":
             payload = action.payload;
-            index = find_index_of_child_id(state, payload.parent_id, payload.child_id);
+            
             new_state = state.slice();
-            new_state[payload.parent_id][index].interval_id = payload.interval_id;
+            new_state[payload.parent_id] = new_state[payload.parent_id].map(items => {
+                if(items.child_id !== payload.child_id){
+                    return items
+                }
+                items.interval_id = payload.interval_id;
+                return items;
+            });
             
             return new_state;
 
