@@ -12,6 +12,7 @@ describe("concatenateTimeToStr", function(){
             hours: "1"
         };
         assert.equal(whiterabbit.concatenate_time_to_str(obj), "123")
+        assert.equal(whiterabbit.concatenate_time_to_str(obj, whiterabbit.pad_zero), "010203")        
     })
 });
 

@@ -12,6 +12,7 @@ import convert_time_to_milli from "./lib/convertTimeToMilli";
 import display from "./lib/display";
 import echo from "./lib/echo";
 import generate_in_date_time from "./lib/generateInDateTime";
+import identity from "./lib/identity";
 import is_time_of_object from "./lib/isTimeofObject";
 import is_time_of_string from "./lib/isTimeOfString";
 import is_tommorow from "./lib/isTommorow";
