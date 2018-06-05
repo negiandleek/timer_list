@@ -1,7 +1,7 @@
 import is_time_of_string from "./isTimeOfString";
 import convert_milli_time from "./convertMilliToTime";
 
-export default function convert_str_to_time(value){
+export default function convert_str_to_milli(value){
     is_time_of_string(value)
 
     // hour,minute,second;
@@ -18,5 +18,5 @@ export default function convert_str_to_time(value){
 
     time.forEach((str,i) => {result += Number(str) * based[i]});
 
-    return convert_milli_time(result);
+    return result;
 }
