@@ -103,6 +103,15 @@ describe("is_tomorrow", function(){
     });
 });
 
+describe("normalize_name_follow_time", function(){
+    it("配列のキーを正規化", function(){
+        assert.deepEqual(whiterabbit.normalize_name_follow_time(["hou","h","minutes", "m"]), ["hours", "minutes"]);
+    });
+    it("オブジェクトのキーを正規化", function(){
+        assert.deepEqual(whiterabbit.normalize_name_follow_time({hom: 0, h: 0, m: 1, minutes: 2}), {hours: 0, minutes: 1});
+    });
+});
+
 describe("pad_zero", function(){
     it("stringをゼロで埋める", function(){
         assert.equal(whiterabbit.pad_zero("1"), "01");

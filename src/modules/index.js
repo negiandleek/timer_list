@@ -16,6 +16,7 @@ import identity from "./lib/identity";
 import is_time_of_object from "./lib/isTimeofObject";
 import is_time_of_string from "./lib/isTimeOfString";
 import is_tommorow from "./lib/isTommorow";
+import normalize_name_follow_time from "./lib/normalizeNameFollowTime";
 import pad_zero from "./lib/padZero";
 import pad_zero_specific from "./lib/padZeroSpecific";
 import put_time_base_time from "./lib/putTimeBaseTime";
@@ -36,6 +37,7 @@ const ticktack = {
     is_time_of_object,
     is_time_of_string,
     is_tommorow,
+    normalize_name_follow_time,
     pad_zero,
     pad_zero_specific,
     put_time_base_time,
