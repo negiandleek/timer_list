@@ -17,6 +17,7 @@ import is_time_of_object from "./lib/isTimeofObject";
 import is_time_of_string from "./lib/isTimeOfString";
 import is_tommorow from "./lib/isTommorow";
 import pad_zero from "./lib/padZero";
+import pad_zero_specific from "./lib/padZeroSpecific";
 import put_time_base_time from "./lib/putTimeBaseTime";
 import put_time_base_ten from "./lib/putTimeBaseTen";
 import shift_time_to_input from "./lib/shiftTimeToInput";
@@ -36,6 +37,7 @@ const ticktack = {
     is_time_of_string,
     is_tommorow,
     pad_zero,
+    pad_zero_specific,
     put_time_base_time,
     put_time_base_ten,
     shift_time_to_input,
