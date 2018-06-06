@@ -1,18 +1,19 @@
-const based = {
-    "hours": 60 * 60 * 1000,
-    "minutes": 60 * 1000,
-    "seconds": 1000,
-};
-const based_keys = Object.keys(based).map((key)=>key);
+import _ from "underscore";
+import alpha from "./alpha";
+
+let base = {};
+_.each(alpha.time_order, function(key, i){
+    base[key] = alpha.timer_based[i]
+});
 
 export default function convert_time_to_milli(obj){
-    let r = 0;
-    let keys = Object.keys(obj).map((key)=>key);
-    keys.forEach((key)=>{
-        if(based_keys.indexOf(key) === -1){
-            throw new TypeError("Object Key must be 'hours' or 'minutes' or 'seconds'");
-        }
-        r += Number(obj[key]) * based[key];
-    })
-    return r;
+    let result = _.reduce(
+        obj, 
+        (memo, value, key) => {
+            if(typeof base[key] === "undefined")return memo;
+            return memo + (base[key] * value)
+        },
+        0
+    );
+    return result;
 }
