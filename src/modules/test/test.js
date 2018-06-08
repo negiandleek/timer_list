@@ -133,12 +133,12 @@ describe("pad_zero", function(){
 
 describe("pad_zero_specific", function(){
     it("timer_orderに合わせてarrayを0で埋める", function(){
-        assert.deepEqual(whiterabbit.pad_zero_specific(["11","22"],"m,seconds"), ["00","11","22", "0000"]);
+        assert.deepEqual(whiterabbit.pad_zero_specific(["11","22"],"m,seconds"), ["00","11","22","0000"]);
         // assert.equal(whiterabbit.pad_zero_specific(["11","22"],"s","minutes"), ["00","11","22", "0000"]);        
     });
-    // it("timer_orderに合わせてobjectを0で埋める", function(){
-    //     assert.equal(whiterabbit.pad_zero_specific({h: "11", hoge: "22", seconds: "33"}), {hours: "11", minutes: "00", seconds: "33", minutes: "0000"});
-    // });
+    it("timer_orderに合わせてobjectを0で埋める", function(){
+        assert.deepEqual(whiterabbit.pad_zero_specific({hours:"11", seconds: "33"}), {hours: "11", minutes: "00", seconds: "33", millis: "0000"});
+    });
 })
 
 describe("put_time_base_ten", function(){
