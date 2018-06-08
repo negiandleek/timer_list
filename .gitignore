@@ -4,3 +4,4 @@ dict/
 .package-lock.json
 **/*debug*
 **/cache/*
+**/*.DS_Store
