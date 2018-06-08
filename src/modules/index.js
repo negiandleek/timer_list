@@ -1,6 +1,6 @@
 /*
 {
-    "name": "ticktack",
+    "name": "whiterabbit",
     "version": "1.0.0"
 }
 */
@@ -25,7 +25,7 @@ import shift_time_to_input from "./lib/shiftTimeToInput";
 import slice_time_of_string from "./lib/sliceTimeOfString";
 import undisplay from "./lib/undisplay";
 
-const ticktack = {
+const whiterabbit = {
     alpha,
     concatenate_time_to_str,
     convert_milli_to_time,
@@ -47,7 +47,7 @@ const ticktack = {
     undisplay
 }
 
-export default ticktack;
+export default whiterabbit;
 
 // TODO:
 // 必要なタイムを自由に取得できるように拡張する
