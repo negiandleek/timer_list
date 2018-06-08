@@ -17,6 +17,7 @@ import is_time_of_object from "./lib/isTimeofObject";
 import is_time_of_string from "./lib/isTimeOfString";
 import is_tommorow from "./lib/isTommorow";
 import normalize_name_follow_time from "./lib/normalizeNameFollowTime";
+import normalize_time_units from "./lib/normalizeTimeUnits";
 import pad_zero from "./lib/padZero";
 import pad_zero_specific from "./lib/padZeroSpecific";
 import put_time_base_time from "./lib/putTimeBaseTime";
@@ -44,6 +45,7 @@ const whiterabbit = {
     put_time_base_ten,
     shift_time_to_input,
     slice_time_of_string,
+    normalize_time_units,
     undisplay
 }
 

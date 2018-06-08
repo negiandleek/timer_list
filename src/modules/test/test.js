@@ -112,6 +112,13 @@ describe("normalize_name_follow_time", function(){
     });
 });
 
+describe("normalize_time_units function", function(){
+    it("時間の単位を正規化した配列を返す", function(){
+        assert.deepEqual(whiterabbit.normalize_time_units("seconds,m"), ["minutes","seconds"])
+        assert.deepEqual(whiterabbit.normalize_time_units("m","hours","seconds","minutes"), ["hours","minutes","seconds"])
+    });
+});
+
 describe("pad_zero", function(){
     it("stringをゼロで埋める", function(){
         assert.equal(whiterabbit.pad_zero("1"), "01");
