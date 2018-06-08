@@ -17,10 +17,6 @@ export default function put_time_base_time(clock, value = "1000"){
     let converted_milli = convert_str_to_milli(clock);
     let converted_time = convert_milli_to_time(converted_milli);
     let millis = convert_time_to_milli(converted_time);
-    
-    // if(Number(millis) < Number(value)){
-    //     return clock;
-    // }
 
     let time = convert_milli_to_time(Number(millis) + Number(value));
     let forward_date = pad_zero(time, 2);
@@ -36,5 +32,3 @@ export default function put_time_base_time(clock, value = "1000"){
     let time_ = concatenate_time_to_str(date);
     return time_.slice(-1 * clock.length);
 }
-
-var hoge = put_time_base_time("6000", "-60000")

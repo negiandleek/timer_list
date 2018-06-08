@@ -12,15 +12,14 @@ order = order.map((str)=>{
 order[3]="Milliseconds"
 
 export default function generate_in_date_time(value, alarm=true){
-    let in_date_time = new Date();
-
     if(!alarm){
         is_time_of_string(value);
         let n = convert_str_to_milli(value);
         let m = convert_milli_to_time(n);
         let l = convert_time_to_milli(m);
-        in_date_time = new Date(new Date().getTime() + l);
+        return new Date(new Date().getTime() + l);
     }else{
+        let in_date_time = new Date();
         let tommorow_flag = is_tommorow(value);
         let target_date = value.split(alpha.time_split).map(Number);
         let padding = new Array(order.length - target_date.length).fill(0)
@@ -32,6 +31,7 @@ export default function generate_in_date_time(value, alarm=true){
         order.forEach((name,i)=>{
             in_date_time["set" + name](target_date[i])
         })
+
+        return in_date_time;
     }
-    return in_date_time;
 }

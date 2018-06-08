@@ -25,7 +25,7 @@ export default function put_time_base_ten(clock, value){
 
     let origin = clock.split(reg).map(Number);
     let origin_digits = Math.ceil(clock.length / 2);
-    // normalize
+    // split sign and number
     let sign = 1;
     let remove_sign = value_string.replace("-", ()=>{sign = -1; return ""});
     let next = remove_sign.split(reg).map(Number)
