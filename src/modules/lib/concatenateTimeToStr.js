@@ -1,6 +1,5 @@
 import alpha from "./alpha";
 import identity from "./identity";
-import pad_zero from "./padZero";
 import _ from "underscore";
 
 export default function concatenate_time_to_str(obj, pad){

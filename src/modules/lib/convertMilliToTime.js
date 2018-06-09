@@ -1,4 +1,3 @@
-import pad_zero from "./padZero";
 const h = 60 * 60 * 1000;
 const m = 60 * 1000;
 const s = 1000

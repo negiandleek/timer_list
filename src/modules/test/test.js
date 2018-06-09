@@ -82,7 +82,7 @@ describe("convertTimeToMilli", function(){
         };
         assert.equal(whiterabbit.convert_time_to_milli(obj), "12503000");
     });
-})
+});
 
 describe("display function", function() {
     it('2つの間にコロンを挿入する', function() {
@@ -156,21 +156,8 @@ describe("normalize_time_units function", function(){
 });
 
 describe("pad_zero", function(){
-    it("stringをゼロで埋める", function(){
-        assert.equal(whiterabbit.pad_zero("1"), "01");
+    it("4桁ゼロで埋める", function(){
         assert.equal(whiterabbit.pad_zero("1", 4), "0001")
-        assert.equal(whiterabbit.pad_zero("11"), "11")
-    });
-    it("objectをゼロで埋める", function(){
-        assert.deepEqual(whiterabbit.pad_zero(
-                {hours: "1", minutes: "20"}
-            ), {hours: "01", minutes: "20"}
-        );
-        assert.deepEqual(whiterabbit.pad_zero(
-            {hours: "1", minutes: "20", seconds: "3000"},
-            4
-            ), {hours: "0001", minutes: "0020", seconds:"3000"}
-        );
     });
 });
 
