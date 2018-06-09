@@ -91,35 +91,27 @@ describe("display function", function() {
     });
 });
 
-describe("generate_in_date_time", function(){
+describe("generate_date", function(){
     var temp = new Date();
     var now = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate(), 10);
+    var fake_time;
     var feature;
-    var clock;
     before(function(done){
-        clock = sinon.useFakeTimers(now);
-        feature = new Date(clock.Date());
-        feature.setDate(feature.getDate() + 1);
-        feature.setHours(feature.getHours() - 1);
+        fake_time = sinon.useFakeTimers(now);
+        feature = new Date(fake_time.Date());
+        feature.setHours(feature.getHours() + 1);
         done();
     });
-    it("何時間後のdateを生成する", function(){
+    it("1時間後のdateを生成する", function(){
         assert.equal(
-            whiterabbit.generate_in_date_time("1000", false).getTime(), 
-            new Date(now.setMinutes(now.getMinutes() + 10)).getTime()
-        );
-        assert.equal(
-            whiterabbit.generate_in_date_time(
-                ("0" + feature.getHours()).slice(-2) + ("0" + feature.getMinutes()).slice(-2),
-                true
-            ).getTime(),
+            whiterabbit.generate_date(3600000).getTime(), 
             feature.getTime()
         );
     });
     after(function(done){
-        clock.restore();
+        fake_time.restore();
         done();
-    });
+    })
 });
 
 describe("is_past function", function(){
