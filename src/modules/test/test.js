@@ -28,9 +28,48 @@ describe("convertMilliToTime", function(){
 });
 
 describe("convertStrToTime", function(){
-    it("strをmilliに変換する", function(){
-        assert.deepEqual(whiterabbit.convert_str_to_milli("1010"), 10 * 60000 + 10 * 1000);
-        assert.deepEqual(whiterabbit.convert_str_to_milli("101010"), 10 * 3600000 + 10 * 60000 + 10 * 1000);        
+    var temp = new Date();
+    var now = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate(), 10,10);
+    var fake_clock;
+    var feature_today;
+    var feature_tomorrow;
+    before(function(done){
+        fake_clock = sinon.useFakeTimers(now);
+
+        feature_today= new Date(fake_clock.Date());
+        feature_today.setHours(feature_today.getHours() + 1);
+
+        feature_tomorrow = new Date(fake_clock.Date());
+        feature_tomorrow.setHours(feature_tomorrow.getHours() - 1);
+        feature_tomorrow.setDate(feature_tomorrow.getDate() + 1);
+
+        done();
+    });
+    describe("timer", function(){
+        it("4桁の文字をmilliに変換する", function(){
+            assert.deepEqual(whiterabbit.convert_str_to_milli("1010"), 10 * 60000 + 10 * 1000);
+        });
+        it("6桁の文字をmilliに変換する", function(){
+            assert.deepEqual(whiterabbit.convert_str_to_milli("101010"), 10 * 3600000 + 10 * 60000 + 10 * 1000);
+        })
+    });
+    describe("alarm", function(){
+        it("4桁の文字をアラームに変換する(今日)", function(){
+            assert.deepEqual(whiterabbit.convert_str_to_milli(
+                feature_today.getHours() + "" + feature_today.getMinutes(),
+                true
+            ), feature_today.getTime());
+        });
+        it("4桁の文字をアラームに変換する(明日)", function(){
+            assert.equal(whiterabbit.convert_str_to_milli(
+                feature_tomorrow.getHours() + "" + feature_tomorrow.getMinutes(),
+                true
+            ),feature_tomorrow.getTime());
+        });
+    });
+    after(function(done){
+        fake_clock.restore();
+        done();
     });
 });
 
