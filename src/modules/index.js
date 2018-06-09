@@ -15,7 +15,7 @@ import generate_in_date_time from "./lib/generateInDateTime";
 import identity from "./lib/identity";
 import is_time_of_object from "./lib/isTimeofObject";
 import is_time_of_string from "./lib/isTimeOfString";
-import is_tommorow from "./lib/isTommorow";
+import is_past from "./lib/isPast";
 import normalize_name_follow_time from "./lib/normalizeNameFollowTime";
 import normalize_time_units from "./lib/normalizeTimeUnits";
 import pad_zero from "./lib/padZero";
@@ -37,7 +37,7 @@ const whiterabbit = {
     generate_in_date_time,
     is_time_of_object,
     is_time_of_string,
-    is_tommorow,
+    is_past,
     normalize_name_follow_time,
     pad_zero,
     pad_zero_specific,

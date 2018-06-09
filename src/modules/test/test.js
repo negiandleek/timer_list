@@ -83,19 +83,24 @@ describe("generate_in_date_time", function(){
     });
 });
 
-describe("is_tomorrow", function(){
+describe("is_past function", function(){
     var temp = new Date();
-    var now = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate(), 10);
+    var now = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate());
     var date;
     var clock;
+    var past;
+    var feature;
     before(function(done){
         clock = sinon.useFakeTimers(now);
-        date = new Date(clock);
+        past = new Date(now.setHours(now.getHours() - 1));
+        feature = new Date(now.setHours(now.getHours() + 2));
         done();
     });
-    it("明日かどうか", function(){
-        assert.equal(whiterabbit.is_tommorow("0900"), true);
-        assert.equal(whiterabbit.is_tommorow("1100"), false);
+    it("過去", function(){
+        assert.equal(whiterabbit.is_past(past), true);
+    });
+    it("過去ではない", function(){
+        assert.equal(whiterabbit.is_past(feature), false);
     });
     after(function(done){
         clock.restore();
