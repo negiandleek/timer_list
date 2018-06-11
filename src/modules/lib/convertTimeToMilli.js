@@ -1,6 +1,7 @@
 import _ from "underscore";
 import alpha from "./alpha";
 
+// TODO: refactoring
 let base = {};
 _.each(alpha.time_order, function(key, i){
     base[key] = alpha.timer_based[i]
