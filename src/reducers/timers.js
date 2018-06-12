@@ -20,16 +20,17 @@ const timers = (state = initial_state, action) => {
         case "ADD_TIMER":
             new_state = state.slice();
             payload = action.payload; 
-            var date = {
+            var data = {
                 parent_id: payload.parent_id,
                 count: payload.count,
                 date: payload.date,
                 type: payload.type,
+                memo: "",
                 interval_id: 0,
                 child_id: Math.random().toString(36).substr(2, 9),
                 stoped_flag: false
             };
-            new_state[payload.parent_id].push(date);
+            new_state[payload.parent_id].push(data);
             
             return new_state;
 
@@ -70,6 +71,18 @@ const timers = (state = initial_state, action) => {
                 return items;
             });
 
+            return new_state;
+
+        case "UPDATE_MEMO":
+            payload = action.payload;
+            new_state = state.slice();
+            new_state[payload.parent_id] = new_state[payload.parent_id].map(items => {
+                if(items.child_id !== payload.child_id){
+                    return items
+                }
+                items.memo = payload.value;
+                return items;
+            });
             return new_state;
 
         case "SET_INTERVAL":

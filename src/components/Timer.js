@@ -6,15 +6,35 @@ import * as utils from "../utils"
 export default class Timer extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            memo_flag: false,
+        };
+        this.textInput = React.createRef();
     }
-    componentDidMount(){
-        this.start();
+    componentDidUpdate(prevProps, prevState){
+        if(this.state.memo_flag !== prevState.memo_flag && !prevState.memo_flag){
+            this.textInput.current.focus();
+        }
     }
     render(){
         const correct_count = ticktack.display(this.props.data.count);
+        const data = this.props.data;
         return (
             <div className="timer">
                 {correct_count}
+                <div className="timer__memo">
+                    <input 
+                        type="text"
+                        ref={this.textInput}
+                        value={this.props.data.memo}
+                        onBlur={this.toggle_state.bind(this)}
+                        onChange={(e)=>this.props.update_memo(
+                            data.parent_id,
+                            data.child_id,
+                            e.target.value
+                        )}
+                    />
+                </div>
                 <div className="timer__btns">
                     {!this.props.data.type ?
                         <input type="button" value="resume" onClick={this.resume.bind(this)} />:
@@ -34,6 +54,11 @@ export default class Timer extends React.Component{
                 </div>
             </div>
         )
+    }
+    toggle_state(){
+        this.setState({
+            memo_flag: !this.state.memo_flag
+        });
     }
     tick(){
         const props = this.props.data;

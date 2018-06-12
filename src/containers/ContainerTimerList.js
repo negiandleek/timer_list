@@ -12,8 +12,10 @@ const mapDispatchToProps = dispatch => ({
     update_timer: (parentId, childId, count, date) => dispatch(actions.update_timer(parentId, childId, count, date)),
     delete_timer: (parentId, childId, inervalId) => dispatch(actions.delete_timer(parentId, childId, inervalId)),
     set_interval: (parentId, childId, intervalId) => dispatch(actions.set_interval(parentId, childId, intervalId)),
-    toggle_timer: (parentId, childId) => dispatch(actions.toggle_timer(parentId, childId))
+    toggle_timer: (parentId, childId) => dispatch(actions.toggle_timer(parentId, childId)),
+    update_memo: (parentId, childId, value) => dispatch(actions.update_memo(parentId, childId, value))
 });
+
 const TimerList = (props) => {
     return (
         <div className="timer_list">
@@ -23,6 +25,7 @@ const TimerList = (props) => {
                     delete_timer={props.delete_timer}
                     set_interval={props.set_interval}
                     toggle_timer={props.toggle_timer}
+                    update_memo={props.update_memo}
                     items={items}
                     key={"timers-" + i}
                 />

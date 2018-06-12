@@ -14,6 +14,7 @@ const Timers = (props) => {
                         delete_timer={props.delete_timer}
                         set_interval={props.set_interval}
                         toggle_timer={props.toggle_timer}
+                        update_memo={props.update_memo}
                     />
                 </li>
             ))}
