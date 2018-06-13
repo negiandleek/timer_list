@@ -11,6 +11,11 @@ export default class Timer extends React.Component{
         };
         this.textInput = React.createRef();
     }
+    componentDidMount(){
+        if(!this.props.data.stoped_flag){
+            this.start();
+        }
+    }
     componentDidUpdate(prevProps, prevState){
         if(this.state.memo_flag !== prevState.memo_flag && !prevState.memo_flag){
             this.textInput.current.focus();
@@ -74,12 +79,13 @@ export default class Timer extends React.Component{
             );
         }else{
             let props = this.props.data;
-            this.props.toggle_timer(props.parent_id, props.child_id);
             this.props.update_timer(
                 props.parent_id,
                 props.child_id,
                 "0".repeat(4 + (props.type * 2)), 
             );
+            utils.chime.play(3);
+            stop();
         }
     }
     start(){
@@ -88,9 +94,9 @@ export default class Timer extends React.Component{
         if(data.stoped_flag)return;
         if(props.interval)return;
         
-        this.tick();
-        
-        const interval = setInterval(() => this.tick(), 1000);
+        const interval = setInterval(() => {
+            return this.tick()
+        }, 1000);
         props.set_interval(
             data.parent_id,
             data.child_id,
@@ -121,9 +127,12 @@ export default class Timer extends React.Component{
     }
     stop(){
         let data = this.props.data;
-        clearInterval(data.interval_id);
-        this.props.update_timer(data.parent_id, data.child_id, data.count);
-        this.props.toggle_timer(data.parent_id, data.child_id);
+        if(!data.stoped_flag){
+            this.props.update_timer(data.parent_id, data.child_id, data.count);
+            this.props.toggle_timer(data.parent_id, data.child_id);
+            utils.chime.stop();
+            clearInterval(data.interval_id);
+        }
     }
 }
 
