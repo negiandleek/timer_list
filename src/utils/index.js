@@ -1,4 +1,5 @@
 import ticktack from "../modules"
+import _ from "underscore";
 
 export function get_count(date, isAlarm){
     let time = get_remaining_time(date, isAlarm);
@@ -19,3 +20,46 @@ export function get_remaining_time(date, isAlarm){
 export function get_diff_date_and_now(target){
     return target.getTime() - new Date().getTime();
 };
+
+export let chime = (function(){
+    let urls = ["./chime.mp3", "./chime.ogg", "./chime.wav"];
+    let mimes = ["audio/mp3", "audio/ogg", "audio/wav"];
+    let audios = _.map(urls, (url)=> new Audio(url));
+    let ready = _.filter(audios, (audio, index) => "probably" === audio.canPlayType(mimes[index]))
+
+    //todo: refactoring;
+    let play = function (audio){
+        if(!audio){
+            return ()=>alert("finish!!");
+        }
+        let loaded_flag = false;
+        audio.addEventListener("loadeddata", ()=>{
+            loaded_flag = true
+        });
+
+        return function count_play_audio(count = 1, volume = 0.25){
+            if(!loaded_flag){
+                audio.addEventListener("loadeddata", ()=>{
+                    loaded_flag = true
+                    count_play_audio(count, volume);
+                });
+                return void 0;
+            }
+            let iterations = count - 1;
+            audio.volume = volume;
+            audio.play();
+            audio.addEventListener("ended", function(){
+                if(iterations > 0){
+                    iterations -= 1;
+                    this.play();
+                }
+            });
+        }
+    }
+    
+    return {
+        audio: ready[0],
+        play: play(ready[0]),
+        stop: ()=>ready[0].pause()
+    };
+})();

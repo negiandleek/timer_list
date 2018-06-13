@@ -1,3 +1,4 @@
+import _ from "underscore";
 import React from "react";
 import ReactDOM from "react-dom";
 import {createStore} from "redux";
@@ -18,4 +19,4 @@ ReactDOM.render(
 
 window.addEventListener("beforeunload", ()=>{
     store.dispatch({type: "SET_LOCAL_STORAGE"});
-})
+});

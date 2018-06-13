@@ -30,6 +30,9 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             {from: "src/index.html"}
+        ]),
+        new CopyWebpackPlugin([
+            {from: "src/assets"}
         ])
     ]
 }
