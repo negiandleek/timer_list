@@ -47,6 +47,7 @@ export let chime = (function(){
             }
             let iterations = count - 1;
             audio.volume = volume;
+            audio.state = 2;
             audio.play();
             audio.addEventListener("ended", function(){
                 if(iterations > 0){
@@ -65,6 +66,7 @@ export let chime = (function(){
         stop: ()=>{
             ready[0].pause()
             ready[0].currentTime = 0;
+            ready[0].state = 3;
         },
     };
 })();

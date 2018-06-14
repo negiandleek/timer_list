@@ -24,7 +24,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const TimerList = (props) => {
-    let count = props.timers[0][0].count || "0000";
+    
+    let count = props.timers[0].length >= 1? props.timers[0][0].count: "0000";
     let for_display = ticktack.display(count);
     document.title = for_display;
     return (
