@@ -1,5 +1,6 @@
 import * as utils from "../utils";
 import ticktack from "../modules";
+import _ from "underscore";
 
 const initial_state = [[],[],[]];
 
@@ -10,8 +11,17 @@ function find_index_of_child_id(state, parent_id, child_id){
             index = i;
         }
     }
-
     return index;
+}
+
+function bubble_sort(ary, key, count){
+    let i = 0;
+    for(; i < ary.length; i+=1){
+        if(ary[i][key] >= count){
+            break;
+        };
+    }
+    return i;
 }
 
 const timers = (state = initial_state, action) => {
@@ -22,7 +32,7 @@ const timers = (state = initial_state, action) => {
         case "ADD_TIMER":
             new_state = state.slice();
             payload = action.payload; 
-            var data = {
+            const data = {
                 parent_id: payload.parent_id,
                 count: payload.count,
                 date: payload.date,
@@ -33,8 +43,8 @@ const timers = (state = initial_state, action) => {
                 child_id: Math.random().toString(36).substr(2, 9),
                 stoped_flag: false //active
             };
-            new_state[payload.parent_id].push(data);
-            
+            const i = bubble_sort(new_state[0], "count", data.count);
+            new_state[0].splice(i, 0, data);
             return new_state;
 
         case "DELETE_TIMER":
@@ -49,8 +59,8 @@ const timers = (state = initial_state, action) => {
         case "UPDATE_TIMER":
             payload = action.payload;
             new_state = state.slice();
+            new_state[0] = _.sortBy(new_state[0], (obj)=> parseInt(obj.count, 10));
             new_state[0] = new_state[0].map(items => {
-                console.log(items.stoped_flag)
                 if(items.stoped_flag)return items;
                 const date = (items.date instanceof Date)? items.date: new Date(items.date);
                 const diff = utils.get_diff_date_and_now(date);

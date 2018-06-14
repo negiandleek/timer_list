@@ -8,6 +8,7 @@ export default class Timer extends React.Component{
         super(props);
         this.state = {
             memo_flag: false,
+            chime_flag: false
         };
         this.textInput = React.createRef();
     }
