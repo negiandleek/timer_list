@@ -7,7 +7,7 @@ export default class Timers extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            interval: false
+            interval: false,
         };
     }
     componentDidMount(){

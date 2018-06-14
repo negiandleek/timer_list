@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import Timers from "../components/Timers";
 import actions from "../actions";
 import { set_interval_global } from "../actions/actionTimer";
+import ticktack from "../modules/";
 
 // timer_list component -> timersに変更　App.js参照
 const mapStateToProps = state => {
@@ -23,6 +24,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const TimerList = (props) => {
+    let count = props.timers[0][0].count || "0000";
+    let for_display = ticktack.display(count);
+    document.title = for_display;
     return (
         <div className="timer_list">
             {props.timers.map((items,i)=>(
