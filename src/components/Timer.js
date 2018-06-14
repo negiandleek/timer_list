@@ -8,13 +8,26 @@ export default class Timer extends React.Component{
         super(props);
         this.state = {
             memo_flag: false,
-            chime_flag: false
+            chime_flag: true,
         };
         this.textInput = React.createRef();
+    }
+    componentDidMount(){
+        if(parseInt(this.props.data.count, 10) === 0){
+            this.setState({
+                chime_flag: false
+            })
+        };
     }
     componentDidUpdate(prevProps, prevState){
         if(this.state.memo_flag !== prevState.memo_flag && !prevState.memo_flag){
             this.textInput.current.focus();
+        }
+        if(parseInt(this.props.data.count, 10) === 0 && this.state.chime_flag){
+            this.setState({
+                chime_flag: false,
+            });
+            utils.chime.play(3);
         }
     }
     render(){
@@ -66,13 +79,15 @@ export default class Timer extends React.Component{
         if(data.stoped_flag){
             this.props.resume_timer(data.child_id);
         }
-        // this.tick();
     }
     stop(){
         const data = this.props.data;
+        console.log(utils.chime.audio.state)
         if(!data.stoped_flag){
             this.props.stop_timer(data.child_id);
-            // utils.chime.stop();
+            if(utils.chime.audio.state === 2){
+                utils.chime.stop();
+            }
         }
     }
 }
