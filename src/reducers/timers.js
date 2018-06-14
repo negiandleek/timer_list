@@ -1,3 +1,6 @@
+import * as utils from "../utils";
+import ticktack from "../modules";
+
 const initial_state = [[],[],[]];
 
 function find_index_of_child_id(state, parent_id, child_id){
@@ -15,7 +18,6 @@ const timers = (state = initial_state, action) => {
     let new_state;
     let payload;
     let index;
-
     switch(action.type){
         case "ADD_TIMER":
             new_state = state.slice();
@@ -26,9 +28,10 @@ const timers = (state = initial_state, action) => {
                 date: payload.date,
                 type: payload.type,
                 memo: "",
-                interval_id: 0,
+                interval_id: 0, //delete
+                active: true,
                 child_id: Math.random().toString(36).substr(2, 9),
-                stoped_flag: false
+                stoped_flag: false //active
             };
             new_state[payload.parent_id].push(data);
             
@@ -45,28 +48,48 @@ const timers = (state = initial_state, action) => {
 
         case "UPDATE_TIMER":
             payload = action.payload;
-            
             new_state = state.slice();
-            new_state[payload.parent_id] = new_state[payload.parent_id].map(items => {
-                if(items.child_id !== payload.child_id){
-                    return items
+            new_state[0] = new_state[0].map(items => {
+                console.log(items.stoped_flag)
+                if(items.stoped_flag)return items;
+                const date = (items.date instanceof Date)? items.date: new Date(items.date);
+                const diff = utils.get_diff_date_and_now(date);
+                if(diff <= 0){
+                    items.count = "0".repeat(4 + (items.type * 2));
+                    items.active = false;
+                }else{
+                    items.count = utils.get_count(diff, items.type);;
+                    items.date = date;
                 }
-                items.count = payload.count;
-                items.date = payload.date? payload.date: items.date;
                 return items;
-            })
+            });
 
             return new_state;
 
-        case "TOGGLE_TIMER":
+        case "RESUME_TIMER":
             payload = action.payload;
 
             new_state = state.slice();
-            new_state[payload.parent_id] = new_state[payload.parent_id].map(items => {
+            new_state[0] = new_state[0].map(items => {
                 if(items.child_id !== payload.child_id){
                     return items
                 }
-                items.stoped_flag = !items.stoped_flag;
+                items.stoped_flag = false;
+                items.date = ticktack.generate_in_date_time(items.count, items.type);;
+                return items;
+            });
+
+        return new_state;
+
+        case "STOP_TIMER":
+            payload = action.payload;
+
+            new_state = state.slice();
+            new_state[0] = new_state[0].map(items => {
+                if(items.child_id !== payload.child_id){
+                    return items
+                }
+                items.stoped_flag = true;
                 items.date = payload.date? payload.date: items.date;
                 return items;
             });

@@ -34,7 +34,6 @@ const TimerForm = (props) => {
         )
         props.init_input();
     }
-
     return (
         <div className="timer-input">
             <form 
