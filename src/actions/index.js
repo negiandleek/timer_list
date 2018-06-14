@@ -1,4 +1,4 @@
-import {add_timer, delete_timer, update_timer, toggle_timer, update_memo} from "./actionTimer";
+import {add_timer, delete_timer, update_timer, stop_timer, resume_timer, update_memo, set_interval_global, clear_interval_global} from "./actionTimer";
 import {change_input, init_input, set_interval} from "./actionTimerForm";
 const actions = {
     add_timer,
@@ -8,7 +8,10 @@ const actions = {
     change_input,
     init_input,
     set_interval,
-    toggle_timer
+    stop_timer,
+    resume_timer,
+    set_interval_global,
+    clear_interval_global
 };
 
 export default actions;

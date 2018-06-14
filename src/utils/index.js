@@ -29,18 +29,18 @@ export let chime = (function(){
 
     //todo: refactoring;
     let play = function (audio){
+        audio.state = 0;
         if(!audio){
             return ()=>alert("finish!!");
         }
-        let loaded_flag = false;
         audio.addEventListener("loadeddata", ()=>{
-            loaded_flag = true
+            audio.state = 1;
         });
 
         return function count_play_audio(count = 1, volume = 0.25){
-            if(!loaded_flag){
+            if(audio.state === 0){
                 audio.addEventListener("loadeddata", ()=>{
-                    loaded_flag = true
+                    audio.state = 1
                     count_play_audio(count, volume);
                 });
                 return void 0;
@@ -52,6 +52,8 @@ export let chime = (function(){
                 if(iterations > 0){
                     iterations -= 1;
                     this.play();
+                }else{
+                    audio.state = 3;
                 }
             });
         }
@@ -60,6 +62,9 @@ export let chime = (function(){
     return {
         audio: ready[0],
         play: play(ready[0]),
-        stop: ()=>ready[0].pause()
+        stop: ()=>{
+            ready[0].pause()
+            ready[0].currentTime = 0;
+        },
     };
 })();

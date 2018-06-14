@@ -2,19 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import ticktack from "../modules/index";
 import * as utils from "../utils";
-const reg = /[0-9]:/g;
 
 const TimerForm = (props) => {
     let for_display = ticktack.display(props.form.count);
 
     function handle_change(e){
-        // TODO:0-9,:
-        // if(e.target.value.test(/[0-9]|:/,g)){
-            
-        // }
         const undisp = ticktack.undisplay(e.target.value);
-        const result = ticktack.shift_time_to_input(props.form.count, undisp);
-        return result;
+        let result = ticktack.shift_time_to_input(props.form.count, undisp);
+        if(!/^[0-9]+$/g.test(result)){
+            result = props.form.count;
+        };
+        props.change_input(result);
     }
 
     function handle_click(isAlarm){
@@ -34,7 +32,6 @@ const TimerForm = (props) => {
         )
         props.init_input();
     }
-
     return (
         <div className="timer-input">
             <form 
@@ -44,9 +41,7 @@ const TimerForm = (props) => {
                 <input 
                     type="text"
                     value={for_display}
-                    onChange={(e) => {
-                        props.change_input(handle_change(e))
-                    }}
+                    onChange={(e) => handle_change(e)}
                 />
                 <input 
                     type="button" 
