@@ -1,10 +1,11 @@
 const path = require("path");
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: "development",
     watch: true,
-    entry: "./src/scripts/index.js",
+    entry: ["./src/scripts/index.js", "./src/styles/index.scss"],
     devServer: {
         contentBase: path.join(__dirname, "public"),
     },
@@ -25,6 +26,21 @@ module.exports = {
                     }
                 }
             },
+            {
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: false,
+                            sourceMap: true,
+                            importLoader: 2
+                        }
+                    },
+                    "sass-loader"
+                ]
+            },
         ]
     },
     plugins: [
@@ -34,5 +50,9 @@ module.exports = {
         new CopyWebpackPlugin([
             {from: "src/assets"}
         ]),
+        new MiniCssExtractPlugin({
+            filename: "style.css",
+        })
+      
     ]
 }
