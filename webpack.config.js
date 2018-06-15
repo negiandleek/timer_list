@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
     mode: "development",
     watch: true,
-    entry: "./src/index.js",
+    entry: "./src/scripts/index.js",
     devServer: {
         contentBase: path.join(__dirname, "public"),
     },
@@ -33,6 +33,6 @@ module.exports = {
         ]),
         new CopyWebpackPlugin([
             {from: "src/assets"}
-        ])
+        ]),
     ]
 }
