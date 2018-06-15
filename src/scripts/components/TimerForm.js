@@ -33,26 +33,31 @@ const TimerForm = (props) => {
         props.init_input();
     }
     return (
-        <div className="timer-input">
+        <div className="timer_input">
             <form 
-                className="timer-input__form"
+                className="timer_form"
                 action="javascript:void(0)"
             >
                 <input 
+                    className="timer_form__text"
                     type="text"
                     value={for_display}
                     onChange={(e) => handle_change(e)}
                 />
-                <input 
-                    type="button" 
-                    value="count down"
-                    onClick={handle_click.bind(this, false)}
-                />
-                <input 
-                    type="button"
-                    value="alarm"
-                    onClick={handle_click.bind(this, true)}
-                />
+                <div className="timer_btns">
+                    <input 
+                        className="timer_btns__btn"
+                        type="button" 
+                        value="count down"
+                        onClick={handle_click.bind(this, false)}
+                    />
+                    <input 
+                        className="timer_btns__btn"
+                        type="button"
+                        value="alarm"
+                        onClick={handle_click.bind(this, true)}
+                    />
+                </div>
             </form>
         </div>
     )
