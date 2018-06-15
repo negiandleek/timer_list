@@ -37,7 +37,7 @@ export let chime = (function(){
             audio.state = 1;
         });
 
-        return function count_play_audio(count = 1, volume = 0.25){
+        return function count_play_audio(count = 1, volume = 0.5){
             if(audio.state === 0){
                 audio.addEventListener("loadeddata", ()=>{
                     audio.state = 1
