@@ -44,15 +44,15 @@ const TimerForm = (props) => {
                     value={for_display}
                     onChange={(e) => handle_change(e)}
                 />
-                <div className="timer_btns">
+                <div className="form_btns">
                     <input 
-                        className="timer_btns__btn"
+                        className="form_btns__btn"
                         type="button" 
                         value="count down"
                         onClick={handle_click.bind(this, false)}
                     />
                     <input 
-                        className="timer_btns__btn"
+                        className="form_btns__btn"
                         type="button"
                         value="alarm"
                         onClick={handle_click.bind(this, true)}

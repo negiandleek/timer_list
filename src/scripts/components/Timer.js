@@ -35,12 +35,13 @@ export default class Timer extends React.Component{
         const data = this.props.data;
         return (
             <div className="timer">
-                {correct_count}
                 <div className="timer__memo">
                     <input 
+                        className="timer__memo__input"
                         type="text"
                         ref={this.textInput}
                         value={this.props.data.memo}
+                        placeholder="memo"
                         onBlur={this.toggle_state.bind(this)}
                         onChange={(e)=>this.props.update_memo(
                             data.parent_id,
@@ -49,23 +50,18 @@ export default class Timer extends React.Component{
                         )}
                     />
                 </div>
-                <div className="timer__btns">
-                    {!this.props.data.type ?
-                        <input type="button" value="resume" onClick={this.resume.bind(this)} />:
-                        null
-                    }
-                    {!this.props.data.type?
-                        <input type="button" value="stop" onClick={this.stop.bind(this)} />:
-                        null
-                    }
-                    <input type="button" value="delete" onClick={()=>{
-                        clearInterval(this.props.data.interval_id)
-                        this.props.delete_timer(
-                            this.props.data.parent_id, 
-                            this.props.data.child_id
-                        )
-                    }} />
-                </div>
+                <p className="timer__item">{correct_count}</p>
+                {this.props.data.stoped_flag && this.props.data.active?
+                    <input type="button" value="resume" className="timer__resume" onClick={this.resume.bind(this)} />:
+                    <input type="button" value="stop" className="timer__stop" onClick={this.stop.bind(this)} />
+                }
+                <div className="timer__delete" value="delete" onClick={()=>{
+                    clearInterval(this.props.data.interval_id)
+                    this.props.delete_timer(
+                        this.props.data.parent_id, 
+                        this.props.data.child_id
+                    )
+                }}>×</div>
             </div>
         )
     }
@@ -82,7 +78,6 @@ export default class Timer extends React.Component{
     }
     stop(){
         const data = this.props.data;
-        console.log(utils.chime.audio.state)
         if(!data.stoped_flag){
             this.props.stop_timer(data.child_id);
             if(utils.chime.audio.state === 2){

@@ -3,10 +3,10 @@
     &__text[type=text]{
         width: 100%;
         padding: 0px 0px 4px;
-        font-size: 3em;
+        font-size: 2em;
         text-align: center;
         border-bottom: 3px solid $gray;
-        margin: 0px 0px 24px;
+        margin: 8px 0px 8px;
         &:focus{
             outline: 0;
         }

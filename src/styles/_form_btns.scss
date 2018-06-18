@@ -1,0 +1,27 @@
+.form_btns{
+    position: relative;
+    text-align: center;
+    &__btn[type=button]{
+        width: 120px;
+        padding: 8px 12px;
+        margin: 8px 0px 16px;
+        background-color: $blue;
+        color: $white;
+        border-radius: 2px;
+        &:hover{
+            cursor: pointer;
+            background-color: $blue;
+            color: $white;
+            transition: 0.3s;
+        }
+        &:focus{
+            outline: 0;
+        }
+    }
+    & > input:nth-child(2n-1){
+        margin-right: 8px;
+    }
+    & > input:nth-child(2n){
+        margin-left: 8px;
+    }
+}
