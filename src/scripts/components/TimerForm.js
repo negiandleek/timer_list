@@ -15,20 +15,19 @@ const TimerForm = (props) => {
         props.change_input(result);
     }
 
-    function handle_click(isAlarm){
+    function handle_click(alarmFlag){
         if(!Number(props.form.count)){
             return void 0;
         }
         
-        let date = ticktack.generate_in_date_time(props.form.count, isAlarm);
+        let date = ticktack.generate_in_date_time(props.form.count, alarmFlag);
         let diff = utils.get_diff_date_and_now(date)
-        let count = utils.get_count(diff, isAlarm)
+        let count = utils.get_count(diff, alarmFlag)
         
         props.add_timer(
-            props.form.type, //parent_type
             count,
             date,
-            isAlarm? 1: 0 //alarm_flag
+            alarmFlag? true: false
         )
         props.init_input();
     }

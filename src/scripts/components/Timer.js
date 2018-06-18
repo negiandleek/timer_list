@@ -44,22 +44,20 @@ export default class Timer extends React.Component{
                         placeholder="memo"
                         onBlur={this.toggle_state.bind(this)}
                         onChange={(e)=>this.props.update_memo(
-                            data.parent_id,
-                            data.child_id,
+                            data.id,
                             e.target.value
                         )}
                     />
                 </div>
                 <p className="timer__item">{correct_count}</p>
-                {this.props.data.stoped_flag && this.props.data.active?
+                {this.props.data.stoped_flag && this.props.data.active_flag?
                     <input type="button" value="resume" className="timer__resume" onClick={this.resume.bind(this)} />:
                     <input type="button" value="stop" className="timer__stop" onClick={this.stop.bind(this)} />
                 }
                 <div className="timer__delete" value="delete" onClick={()=>{
                     clearInterval(this.props.data.interval_id)
                     this.props.delete_timer(
-                        this.props.data.parent_id, 
-                        this.props.data.child_id
+                        this.props.data.id
                     )
                 }}>×</div>
             </div>
@@ -73,13 +71,13 @@ export default class Timer extends React.Component{
     resume(){
         const data = this.props.data;
         if(data.stoped_flag){
-            this.props.resume_timer(data.child_id);
+            this.props.resume_timer(data.id);
         }
     }
     stop(){
         const data = this.props.data;
         if(!data.stoped_flag){
-            this.props.stop_timer(data.child_id);
+            this.props.stop_timer(data.id);
             if(utils.chime.audio.state === 2){
                 utils.chime.stop();
             }
@@ -90,8 +88,7 @@ export default class Timer extends React.Component{
 Timer.propTypes = {
     count: PropTypes.number,
     data: PropTypes.shape({
-        parent_id: PropTypes.number,
-        child_id: PropTypes.string,
+        id: PropTypes.string,
         date: PropTypes.Object,
         stoped_flag: PropTypes.bool,
         type: PropTypes.number,

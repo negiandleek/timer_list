@@ -12,11 +12,10 @@ export const init_input = () => ({
     }
 })
 
-export const set_interval = (parentId, childId, intervalId) => ({
+export const set_interval = (id, intervalId) => ({
     type: "SET_INTERVAL",
     payload: {
-        parent_id: parentId,
-        child_id: childId,
+        id,
         interval_id: intervalId
     }
 })

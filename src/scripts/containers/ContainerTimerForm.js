@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    add_timer: (parentId, count, date, type) => dispatch(actions.add_timer(parentId, count, date, type)),
+    add_timer: (count, date, alarmFlag) => dispatch(actions.add_timer(count, date, alarmFlag)),
     change_input: count => dispatch(actions.change_input(count)),
     init_input: () => dispatch(actions.init_input())
 });
