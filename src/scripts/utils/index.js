@@ -4,6 +4,9 @@ import _ from "underscore";
 export function get_count(date, isAlarm){
     let time = get_remaining_time(date, isAlarm);
     let time_of_string = get_time_of_string(time, isAlarm);
+    if(time_of_string.length === 6 && time_of_string.slice(0,2) === "00"){
+        time_of_string = time_of_string.slice(2);
+    }
     return time_of_string;
 }
 

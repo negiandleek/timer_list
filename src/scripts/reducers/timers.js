@@ -56,7 +56,7 @@ const timers = (state = initial_state, action) => {
                     items.count = "0".repeat(4 + (items.alarm_flag * 2));
                     items.active_flag = false;
                 }else{
-                    items.count = utils.get_count(diff, items.alarm_flag);;
+                    items.count = utils.get_count(diff, items.alarm_flag);
                     items.date = date;
                 }
                 return items;

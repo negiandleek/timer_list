@@ -2,7 +2,6 @@ import React from "react";
 import {connect} from "react-redux";
 import Timers from "../components/Timers";
 import actions from "../actions";
-import { set_interval_global } from "../actions/actionTimer";
 import ticktack from "../modules/";
 
 // timer_list component -> timersに変更　App.js参照
@@ -23,10 +22,20 @@ const mapDispatchToProps = dispatch => ({
     clear_interval_global: () => actions.clear_interval_global(dispatch)
 });
 
+function get_active_timer(props){
+    if(props.timers.length === 0) return "00:00";
+    let i = 0;
+    for(; i < props.timers.length - 1; i += 1){
+        if(parseInt(props.timers[i].count) !== 0){
+            break;
+        }
+    }
+    let mark = i? "● ": "";
+    return mark + ticktack.display(props.timers[i].count);
+}
+
 const TimerList = (props) => {
-    let count = props.timers.length >= 1? props.timers[0].count: "0000";
-    let for_display = ticktack.display(count);
-    document.title = for_display;
+    document.title = get_active_timer(props);
     return (
         <div className="timer_list">
             <Timers
