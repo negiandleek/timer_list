@@ -46,6 +46,7 @@ const timers = (state = initial_state, action) => {
         case "UPDATE_TIMER":
             payload = action.payload;
             new_state = state.slice();
+            //TODO
             new_state = _.sortBy(new_state, (obj)=> parseInt(obj.count, 10));
             new_state = new_state.map(items => {
                 if(items.stoped_flag)return items;
