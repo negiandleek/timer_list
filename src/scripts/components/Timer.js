@@ -30,6 +30,7 @@ export default class Timer extends React.Component{
                 chime_flag: false,
             });
             utils.chime.play(3);
+            utils.notice(this.props.data.memo);
         }
     }
     render(){
@@ -58,12 +59,7 @@ export default class Timer extends React.Component{
                     <input type="button" value="resume" className="timer__resume" onClick={this.resume.bind(this)} />:
                     <input type="button" value="stop" className="timer__stop" onClick={this.stop.bind(this)} />
                 }
-                <div className="timer__delete" value="delete" onClick={()=>{
-                    clearInterval(this.props.data.interval_id)
-                    this.props.delete_timer(
-                        this.props.data.id
-                    )
-                }}>×</div>
+                <div className="timer__delete" value="delete" onClick={this.delete.bind(this)}>×</div>
             </div>
         )
     }
@@ -85,6 +81,12 @@ export default class Timer extends React.Component{
             if(utils.chime.audio.state === 2){
                 utils.chime.stop();
             }
+        }
+    }
+    delete(){
+        this.props.delete_timer(this.props.data.id)
+        if(utils.chime.audio.state === 2){
+            utils.chime.stop();
         }
     }
 }

@@ -8,7 +8,7 @@ import reducer from "./reducers";
 
 import App from "./components/App";
 
-const persisted_state = localStorage.getItem("timers") ? JSON.parse(localStorage.getItem("timers")) : [[],[],[]];
+const persisted_state = localStorage.getItem("timers") ? JSON.parse(localStorage.getItem("timers")) : [];
 const store = createStore(reducer, {timers: persisted_state});
 ReactDOM.render(
     <Provider store={store}>

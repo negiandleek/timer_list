@@ -33,9 +33,6 @@ export let chime = (function(){
     //todo: refactoring;
     let play = function (audio){
         audio.state = 0;
-        if(!audio){
-            return ()=>alert("finish!!");
-        }
         audio.addEventListener("loadeddata", ()=>{
             audio.state = 1;
         });
@@ -72,4 +69,30 @@ export let chime = (function(){
             ready[0].state = 3;
         },
     };
+})();
+
+export let notice = (function(){
+    if(window.Notification && Notification.permission !== "granted"){
+        Notification.requestPermission(function (status) {
+            if(Notification.permission !== status){
+                Notification.permission = status;
+            }
+        }); 
+    }
+    return function notice(text=""){
+        if(window.Notification && Notification.permission === "granted"){
+            var notifcation = new Notification("finish", {body: text});
+        }else if(window.Notification && Notification.permission !== "denied"){
+            Notification.requestPermission(function (status) {
+                if(Notification.permission !== status) {
+                    Notification.permission = status;
+                }
+                if (status === "granted") {
+                    notice(text);
+                }
+            });
+        }else{
+            alert("finish:" + text);
+        }
+    }
 })();
