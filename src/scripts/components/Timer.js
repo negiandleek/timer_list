@@ -8,15 +8,17 @@ export default class Timer extends React.Component{
         super(props);
         this.state = {
             memo_flag: false,
-            chime_flag: true,
+            current_flag: true,
+            chime_flag: true
         };
         this.textInput = React.createRef();
     }
     componentDidMount(){
         if(parseInt(this.props.data.count, 10) === 0){
             this.setState({
-                chime_flag: false
-            })
+                chime_flag: false,
+                current_flag: false
+            });
         };
     }
     componentDidUpdate(prevProps, prevState){
@@ -49,7 +51,9 @@ export default class Timer extends React.Component{
                         )}
                     />
                 </div>
-                <p className="timer__item">{correct_count}</p>
+                <p className={"timer__item " + (!this.props.data.stoped_flag && !this.props.data.active_flag && this.state.current_flag? "siren": "")}>
+                    {correct_count}
+                </p>
                 {this.props.data.stoped_flag && this.props.data.active_flag?
                     <input type="button" value="resume" className="timer__resume" onClick={this.resume.bind(this)} />:
                     <input type="button" value="stop" className="timer__stop" onClick={this.stop.bind(this)} />

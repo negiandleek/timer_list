@@ -1,0 +1,15 @@
+.siren{
+    animation: anime1 1s infinite; 
+}
+
+@keyframes anime1 {
+    0%{
+        opacity: 1
+    }
+    50%{
+        opacity: 0
+    }
+    100%{
+        opacity: 1
+    }
+}
