@@ -26,16 +26,18 @@ describe("check_past function", function(){
     });
 });
 
-describe("concatenateTimeToStr", function(){
+describe("concatenate_time_to_ttr", function(){
+    var obj = {
+        seconds: "3",
+        minutes: "2",
+        hours: "1"
+    };
     it("hours, minutes, secondsを連結した文字列にする", function(){
-        var obj = {
-            seconds: "3",
-            minutes: "2",
-            hours: "1"
-        };
         assert.equal(whiterabbit.concatenate_time_to_str(obj), "123")
-        assert.equal(whiterabbit.concatenate_time_to_str(obj, whiterabbit.pad_zero), "010203")        
-    })
+    });
+    it("hours, minutes, secondsを連結、パッドした文字列にする", function(){
+        assert.equal(whiterabbit.concatenate_time_to_str(obj, whiterabbit.pad_zero), "010203")
+    });
 });
 
 describe("convertMilliToTime", function(){
@@ -148,6 +150,8 @@ describe("normalize_name_follow_time", function(){
 describe("normalize_time_units function", function(){
     it("時間の単位を正規化した配列を返す", function(){
         assert.deepEqual(whiterabbit.normalize_time_units("seconds,m"), ["minutes","seconds"])
+    });
+    it("重複した時間の単位を正規化した配列を返す", function(){
         assert.deepEqual(whiterabbit.normalize_time_units("m","hours","seconds","minutes"), ["hours","minutes","seconds"])
     });
 });

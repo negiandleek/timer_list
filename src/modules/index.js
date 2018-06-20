@@ -13,7 +13,7 @@ import convert_time_to_milli from "./lib/convertTimeToMilli";
 import display from "./lib/display";
 import generate_date from "./lib/generateDate";
 import is_numeric from "./lib/isNumeric";
-import is_time_of_object from "./lib/isTimeofObject";
+import is_time_of_object from "./lib/isTimeOfObject";
 import is_time_of_string from "./lib/isTimeOfString";
 import normalize_name_follow_time from "./lib/normalizeNameFollowTime";
 import normalize_time_units from "./lib/normalizeTimeUnits";
@@ -24,6 +24,8 @@ import put_time_base_ten from "./lib/putTimeBaseTen";
 import shift_time_to_input from "./lib/shiftTimeToInput";
 import slice_time_of_string from "./lib/sliceTimeOfString";
 import undisplay from "./lib/undisplay";
+
+import generateTimer from "./utils/generateTimer";
 
 const whiterabbit = {
     alpha,
@@ -45,7 +47,10 @@ const whiterabbit = {
     shift_time_to_input,
     slice_time_of_string,
     normalize_time_units,
-    undisplay
+    undisplay,
+
+    // units
+    generateTimer
 }
 
 export default whiterabbit;
@@ -54,7 +59,7 @@ export default whiterabbit;
 // 必要なタイムを自由に取得できるように拡張する
 // millis対応
 
-// clock -> "00:00"
+// clock -> "0000"
 // time -> {} or [];
 // unit -> "hours","minutes","seconds","millis";
 // units -> ["hours", "minutes","seconds","millis"];
