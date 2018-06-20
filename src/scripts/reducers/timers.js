@@ -73,7 +73,7 @@ const timers = (state = initial_state, action) => {
                     return items
                 }
                 items.stoped_flag = false;
-                items.date = ticktack.generate_in_date_time(items.count, items.alarm_flag);;
+                items.date = ticktack.generate_in_date_time(items.count, false);
                 return items;
             });
 
@@ -88,7 +88,6 @@ const timers = (state = initial_state, action) => {
                     return items
                 }
                 items.stoped_flag = true;
-                items.date = payload.date? payload.date: items.date;
                 return items;
             });
 
