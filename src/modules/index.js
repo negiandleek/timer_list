@@ -5,6 +5,7 @@
 }
 */
 import alpha from "./lib/alpha";
+import check_past from "./lib/check_past";
 import concatenate_time_to_str from "./lib/concatenateTimeToStr";
 import convert_milli_to_time from "./lib/convertMilliToTime";
 import convert_str_to_milli from "./lib/convertStrToMilli";
@@ -15,7 +16,6 @@ import generate_date from "./lib/generateDate";
 import is_numeric from "./lib/isNumeric";
 import is_time_of_object from "./lib/isTimeofObject";
 import is_time_of_string from "./lib/isTimeOfString";
-import is_past from "./lib/isPast";
 import normalize_name_follow_time from "./lib/normalizeNameFollowTime";
 import normalize_time_units from "./lib/normalizeTimeUnits";
 import pad_zero from "./lib/padZero";
@@ -28,6 +28,7 @@ import undisplay from "./lib/undisplay";
 
 const whiterabbit = {
     alpha,
+    check_past,
     concatenate_time_to_str,
     convert_milli_to_time,
     convert_time_to_milli,
@@ -38,7 +39,6 @@ const whiterabbit = {
     is_numeric,
     is_time_of_object,
     is_time_of_string,
-    is_past,
     normalize_name_follow_time,
     pad_zero,
     pad_zero_specific,
