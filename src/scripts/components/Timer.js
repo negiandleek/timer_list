@@ -78,16 +78,12 @@ export default class Timer extends React.Component{
         const data = this.props.data;
         if(!data.stoped_flag){
             this.props.stop_timer(data.id);
-            if(utils.chime.audio.state === 2){
-                utils.chime.stop();
-            }
+            utils.chime.stop();
         }
     }
     delete(){
         this.props.delete_timer(this.props.data.id)
-        if(utils.chime.audio.state === 2){
-            utils.chime.stop();
-        }
+        utils.chime.stop();
     }
 }
 

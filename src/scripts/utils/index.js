@@ -23,7 +23,7 @@ export function get_remaining_time(date, isAlarm){
 export function get_diff_date_and_now(target){
     return target.getTime() - new Date().getTime();
 };
-// TODO:
+
 export let chime = (function(){
     let urls = ["./chime.mp3", "./chime.ogg", "./chime.wav"];
     let mimes = ["audio/mp3", "audio/ogg", "audio/wav"];
@@ -37,7 +37,7 @@ export let chime = (function(){
         audio = ready[0];
         audio.status = 0;
         audio.addEventListener("loadeddata", ()=>{
-            audio.state = 1;
+            audio.status = 1;
         });
     }
 
@@ -45,9 +45,9 @@ export let chime = (function(){
         return function count_play_audio(count = 1, volume = 0.5){
             if(!audio)return;
 
-            if(audio.state === 0){
+            if(audio.status === 0){
                 audio.addEventListener("loadeddata", ()=>{
-                    audio.state = 1
+                    audio.status = 1
                     count_play_audio(count, volume);
                 });
                 return void 0;
@@ -55,14 +55,14 @@ export let chime = (function(){
 
             let iterations = count - 1;
             audio.volume = volume;
-            audio.state = 2;
+            audio.status = 2;
             audio.play();
             audio.addEventListener("ended", function(){
                 if(iterations > 0){
                     iterations -= 1;
                     this.play();
                 }else{
-                    audio.state = 3;
+                    audio.status = 3;
                 }
             });
         }
@@ -71,9 +71,11 @@ export let chime = (function(){
     let stop = function(audio){
         return function(){
             if(!audio)return;
-            audio.pause()
-            audio.currentTime = 0;
-            audio.state = 3;
+            if(audio.status === 2){
+                audio.pause()
+                audio.currentTime = 0;
+                audio.status = 3;
+            }
         }
     }
     
@@ -94,7 +96,8 @@ export let notice = (function(){
     }
     return function notice(text=""){
         if(window.Notification && Notification.permission === "granted"){
-            var notifcation = new Notification("finish", {body: text});
+            var notification = new Notification("finish", {body: text});
+            notification.addEventListener("close", ()=>{chime.stop()})
         }else if(window.Notification && Notification.permission !== "denied"){
             Notification.requestPermission(function (status) {
                 if(Notification.permission !== status) {
