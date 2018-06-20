@@ -1,8 +1,7 @@
-import _ from "underscore";
 import alpha from "./alpha";
 
-export default function is_time_of_object(obj){
-    let keys = Object.key(obj);
+export default function is_time_of_object(time){
+    let keys = Object.key(time);
     alpha.time_order.forEach((item)=>{
         if(keys.indexOf(item) === -1){
             throw new Error("ある")

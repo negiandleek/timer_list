@@ -1,6 +1,6 @@
 import _ from "underscore";
 import alpha from "./alpha";
-import is_past from "./isPast";
+import check_past from "./check_past";
 
 let order = alpha.time_order.slice();
 let methods = order.map((str)=>{
@@ -23,7 +23,7 @@ export default function convert_str_to_milli(value, alarm_flag=false){
         let result = convert(time, value);
         return _.reduce(
             result, 
-            (memo, num, index) => memo + (Number(num) * alpha.timer_based[index]), 
+            (memo, num, index) => memo + (Number(num) * alpha.time_based[index]), 
             0
         );
     }else{
@@ -34,7 +34,7 @@ export default function convert_str_to_milli(value, alarm_flag=false){
         methods.forEach((name,i)=>{
             feature["set" + name](time_ary[i])
         });
-        if(is_past(feature)){
+        if(check_past(feature)){
             feature = new Date(feature.setDate(feature.getDate() + 1))
         }
         return feature.getTime();

@@ -2,8 +2,8 @@ const h = 60 * 60 * 1000;
 const m = 60 * 1000;
 const s = 1000
 
-export default function convert_milli_to_time(value){
-    let result = Number(value);
+export default function convert_milli_to_time(millis){
+    let result = Number(millis);
     let hours = 0;
     let minutes = 0;
     let seconds = 0;

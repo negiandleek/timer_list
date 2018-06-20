@@ -5,14 +5,8 @@ import convert_time_to_milli from "./convertTimeToMilli";
 import convert_str_to_milli from "./convertStrToMilli";
 import convert_milli_to_time from "./convertMilliToTime";
 import pad_zero from "./padZero";
-import echo from "./echo";
 
 export default function put_time_base_time(clock, value = "1000"){
-    is_time_of_string(clock);
-    
-    if(!_.isNumber(value) && _.isNaN(Number(value))){
-        return clock;
-    }
 
     let converted_milli = convert_str_to_milli(clock);
     let converted_time = convert_milli_to_time(converted_milli);

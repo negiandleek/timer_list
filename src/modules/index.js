@@ -11,7 +11,6 @@ import convert_milli_to_time from "./lib/convertMilliToTime";
 import convert_str_to_milli from "./lib/convertStrToMilli";
 import convert_time_to_milli from "./lib/convertTimeToMilli";
 import display from "./lib/display";
-import echo from "./lib/echo";
 import generate_date from "./lib/generateDate";
 import is_numeric from "./lib/isNumeric";
 import is_time_of_object from "./lib/isTimeofObject";
@@ -34,7 +33,6 @@ const whiterabbit = {
     convert_time_to_milli,
     convert_str_to_milli,
     display,
-    echo,
     generate_date,
     is_numeric,
     is_time_of_object,

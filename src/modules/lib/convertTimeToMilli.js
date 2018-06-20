@@ -1,15 +1,14 @@
 import _ from "underscore";
 import alpha from "./alpha";
 
-// TODO: refactoring
 let base = {};
 _.each(alpha.time_order, function(key, i){
-    base[key] = alpha.timer_based[i]
+    base[key] = alpha.time_based[i]
 });
 
-export default function convert_time_to_milli(obj){
+export default function convert_time_to_milli(time){
     let result = _.reduce(
-        obj, 
+        time, 
         (memo, value, key) => {
             if(typeof base[key] === "undefined")return memo;
             return memo + (base[key] * value)

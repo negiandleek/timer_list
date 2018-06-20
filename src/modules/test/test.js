@@ -1,8 +1,30 @@
 var assert = require('assert');
 var whiterabbit = require("../index").default;
-var fs = require('fs')
 var sinon = require("sinon");
-// hours, minutes, second, (millis is not support)
+
+describe("check_past function", function(){
+    var temp = new Date();
+    var now = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate());
+    var clock;
+    var past;
+    var feature;
+    before(function(done){
+        clock = sinon.useFakeTimers(now);
+        past = new Date(now.setHours(now.getHours() - 1));
+        feature = new Date(now.setHours(now.getHours() + 2));
+        done();
+    });
+    it("過去", function(){
+        assert.equal(whiterabbit.check_past(past), true);
+    });
+    it("過去ではない", function(){
+        assert.equal(whiterabbit.check_past(feature), false);
+    });
+    after(function(done){
+        clock.restore();
+        done();
+    });
+});
 
 describe("concatenateTimeToStr", function(){
     it("hours, minutes, secondsを連結した文字列にする", function(){
@@ -112,31 +134,6 @@ describe("generate_date", function(){
         fake_time.restore();
         done();
     })
-});
-
-describe("is_past function", function(){
-    var temp = new Date();
-    var now = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate());
-    var date;
-    var clock;
-    var past;
-    var feature;
-    before(function(done){
-        clock = sinon.useFakeTimers(now);
-        past = new Date(now.setHours(now.getHours() - 1));
-        feature = new Date(now.setHours(now.getHours() + 2));
-        done();
-    });
-    it("過去", function(){
-        assert.equal(whiterabbit.is_past(past), true);
-    });
-    it("過去ではない", function(){
-        assert.equal(whiterabbit.is_past(feature), false);
-    });
-    after(function(done){
-        clock.restore();
-        done();
-    });
 });
 
 describe("normalize_name_follow_time", function(){
