@@ -15,12 +15,10 @@ function bubble_sort(ary, key, count){
 }
 
 const timers = (state = initial_state, action) => {
-    let new_state;
-    let payload;
     switch(action.type){
-        case "ADD_TIMER":
-            new_state = state.slice();
-            payload = action.payload;
+        case "ADD_TIMER":{
+            let new_state = state.slice();
+            const payload = action.payload;
             const data = {
                 id: Math.random().toString(36).substr(2, 9),
                 count: payload.count,
@@ -33,22 +31,18 @@ const timers = (state = initial_state, action) => {
             const i = bubble_sort(new_state, "count", data.count);
             new_state.splice(i, 0, data);
             return new_state;
+        }
+        case "DELETE_TIMER":{
+            const payload = action.payload;
 
-        case "DELETE_TIMER":
-            payload = action.payload;
-            new_state = state.slice();
-            new_state = new_state.filter(items => {
+            return state.filter(items => {
                 return items.id !== payload.id
-            })
+            });
+        }
 
-            return new_state;
-
-        case "UPDATE_TIMER":
-            payload = action.payload;
-            new_state = state.slice();
-            //TODO
-            new_state = _.sortBy(new_state, (obj)=> parseInt(obj.count, 10));
-            new_state = new_state.map(items => {
+        case "UPDATE_TIMER":{
+            let new_state = _.sortBy(state, (obj)=> parseInt(obj.count, 10));
+            return new_state.map(items => {
                 if(items.stoped_flag)return items;
                 const date = (items.date instanceof Date)? items.date: new Date(items.date);
                 const diff = utils.get_diff_date_and_now(date);
@@ -61,14 +55,11 @@ const timers = (state = initial_state, action) => {
                 }
                 return items;
             });
+        }
+        case "RESUME_TIMER":{
+            const payload = action.payload;
 
-            return new_state;
-
-        case "RESUME_TIMER":
-            payload = action.payload;
-
-            new_state = state.slice();
-            new_state = new_state.map(items => {
+            return state.map(items => {
                 if(items.id !== payload.id){
                     return items
                 }
@@ -76,53 +67,43 @@ const timers = (state = initial_state, action) => {
                 items.date = ticktack.generate_in_date_time(items.count, false);
                 return items;
             });
+        }
+        case "STOP_TIMER":{
+            const payload = action.payload;
 
-        return new_state;
-
-        case "STOP_TIMER":
-            payload = action.payload;
-
-            new_state = state.slice();
-            new_state = new_state.map(items => {
+            return state.map(items => {
                 if(items.id !== payload.id){
                     return items
                 }
                 items.stoped_flag = true;
                 return items;
             });
-
-            return new_state;
-
-        case "UPDATE_MEMO":
-            payload = action.payload;
-            new_state = state.slice();
-            new_state = new_state.map(items => {
+        }
+        case "UPDATE_MEMO":{
+            const payload = action.payload;
+            return new_state.map(items => {
                 if(items.id !== payload.id){
                     return items
                 }
                 items.memo = payload.value;
                 return items;
             });
-            return new_state;
+        }
+        case "SET_INTERVAL":{
+            const payload = action.payload;
 
-        case "SET_INTERVAL":
-            payload = action.payload;
-            
-            new_state = state.slice();
-            new_state = new_state.map(items => {
+            return new_state.map(items => {
                 if(items.id !== payload.id){
                     return items
                 }
                 items.interval_id = payload.interval_id;
                 return items;
             });
-            
-            return new_state;
-
-        case "SET_LOCAL_STORAGE":
+        }
+        case "SET_LOCAL_STORAGE":{
             localStorage.setItem("timers", JSON.stringify(state))
             return state;
-
+        }
         default:
             return state;
     }
