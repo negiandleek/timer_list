@@ -12,7 +12,6 @@ import convert_time_to_milli from "./lib/convertTimeToMilli";
 import display from "./lib/display";
 import echo from "./lib/echo";
 import generate_date from "./lib/generateDate";
-import identity from "./lib/identity";
 import is_numeric from "./lib/isNumeric";
 import is_time_of_object from "./lib/isTimeofObject";
 import is_time_of_string from "./lib/isTimeOfString";
@@ -55,4 +54,8 @@ export default whiterabbit;
 
 // TODO:
 // 必要なタイムを自由に取得できるように拡張する
-// hours, minutes, seconds, millis対応
+// millis対応
+
+// clock -> "00:00"
+// time -> {} or [];
+// utnis -> "hours","minutes","seconds","millis";
