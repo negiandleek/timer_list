@@ -58,4 +58,7 @@ export default whiterabbit;
 
 // clock -> "00:00"
 // time -> {} or [];
-// utnis -> "hours","minutes","seconds","millis";
+// unit -> "hours","minutes","seconds","millis";
+// units -> ["hours", "minutes","seconds","millis"];
+// date -> Date type;
+// millis -> millis
