@@ -11,11 +11,12 @@ import convert_str_to_milli from "./lib/convertStrToMilli";
 import convert_time_to_milli from "./lib/convertTimeToMilli";
 import display from "./lib/display";
 import echo from "./lib/echo";
-import generate_in_date_time from "./lib/generateInDateTime";
+import generate_date from "./lib/generateDate";
 import identity from "./lib/identity";
+import is_numeric from "./lib/isNumeric";
 import is_time_of_object from "./lib/isTimeofObject";
 import is_time_of_string from "./lib/isTimeOfString";
-import is_tommorow from "./lib/isTommorow";
+import is_past from "./lib/isPast";
 import normalize_name_follow_time from "./lib/normalizeNameFollowTime";
 import normalize_time_units from "./lib/normalizeTimeUnits";
 import pad_zero from "./lib/padZero";
@@ -34,10 +35,11 @@ const whiterabbit = {
     convert_str_to_milli,
     display,
     echo,
-    generate_in_date_time,
+    generate_date,
+    is_numeric,
     is_time_of_object,
     is_time_of_string,
-    is_tommorow,
+    is_past,
     normalize_name_follow_time,
     pad_zero,
     pad_zero_specific,

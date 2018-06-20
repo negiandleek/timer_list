@@ -28,9 +28,48 @@ describe("convertMilliToTime", function(){
 });
 
 describe("convertStrToTime", function(){
-    it("strをmilliに変換する", function(){
-        assert.deepEqual(whiterabbit.convert_str_to_milli("1010"), 10 * 60000 + 10 * 1000);
-        assert.deepEqual(whiterabbit.convert_str_to_milli("101010"), 10 * 3600000 + 10 * 60000 + 10 * 1000);        
+    var temp = new Date();
+    var now = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate(), 10,10);
+    var fake_clock;
+    var feature_today;
+    var feature_tomorrow;
+    before(function(done){
+        fake_clock = sinon.useFakeTimers(now);
+
+        feature_today= new Date(fake_clock.Date());
+        feature_today.setHours(feature_today.getHours() + 1);
+
+        feature_tomorrow = new Date(fake_clock.Date());
+        feature_tomorrow.setHours(feature_tomorrow.getHours() - 1);
+        feature_tomorrow.setDate(feature_tomorrow.getDate() + 1);
+
+        done();
+    });
+    describe("timer", function(){
+        it("4桁の文字をmilliに変換する", function(){
+            assert.deepEqual(whiterabbit.convert_str_to_milli("1010"), 10 * 60000 + 10 * 1000);
+        });
+        it("6桁の文字をmilliに変換する", function(){
+            assert.deepEqual(whiterabbit.convert_str_to_milli("101010"), 10 * 3600000 + 10 * 60000 + 10 * 1000);
+        })
+    });
+    describe("alarm", function(){
+        it("4桁の文字をアラームに変換する(今日)", function(){
+            assert.deepEqual(whiterabbit.convert_str_to_milli(
+                feature_today.getHours() + "" + feature_today.getMinutes(),
+                true
+            ), feature_today.getTime());
+        });
+        it("4桁の文字をアラームに変換する(明日)", function(){
+            assert.equal(whiterabbit.convert_str_to_milli(
+                feature_tomorrow.getHours() + "" + feature_tomorrow.getMinutes(),
+                true
+            ),feature_tomorrow.getTime());
+        });
+    });
+    after(function(done){
+        fake_clock.restore();
+        done();
     });
 });
 
@@ -43,7 +82,7 @@ describe("convertTimeToMilli", function(){
         };
         assert.equal(whiterabbit.convert_time_to_milli(obj), "12503000");
     });
-})
+});
 
 describe("display function", function() {
     it('2つの間にコロンを挿入する', function() {
@@ -52,50 +91,47 @@ describe("display function", function() {
     });
 });
 
-describe("generate_in_date_time", function(){
+describe("generate_date", function(){
     var temp = new Date();
     var now = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate(), 10);
+    var fake_time;
     var feature;
-    var clock;
     before(function(done){
-        clock = sinon.useFakeTimers(now);
-        feature = new Date(clock.Date());
-        feature.setDate(feature.getDate() + 1);
-        feature.setHours(feature.getHours() - 1);
+        fake_time = sinon.useFakeTimers(now);
+        feature = new Date(fake_time.Date());
+        feature.setHours(feature.getHours() + 1);
         done();
     });
-    it("何時間後のdateを生成する", function(){
+    it("1時間後のdateを生成する", function(){
         assert.equal(
-            whiterabbit.generate_in_date_time("1000", false).getTime(), 
-            new Date(now.setMinutes(now.getMinutes() + 10)).getTime()
-        );
-        assert.equal(
-            whiterabbit.generate_in_date_time(
-                ("0" + feature.getHours()).slice(-2) + ("0" + feature.getMinutes()).slice(-2),
-                true
-            ).getTime(),
+            whiterabbit.generate_date(3600000).getTime(), 
             feature.getTime()
         );
     });
     after(function(done){
-        clock.restore();
+        fake_time.restore();
         done();
-    });
+    })
 });
 
-describe("is_tomorrow", function(){
+describe("is_past function", function(){
     var temp = new Date();
-    var now = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate(), 10);
+    var now = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate());
     var date;
     var clock;
+    var past;
+    var feature;
     before(function(done){
         clock = sinon.useFakeTimers(now);
-        date = new Date(clock);
+        past = new Date(now.setHours(now.getHours() - 1));
+        feature = new Date(now.setHours(now.getHours() + 2));
         done();
     });
-    it("明日かどうか", function(){
-        assert.equal(whiterabbit.is_tommorow("0900"), true);
-        assert.equal(whiterabbit.is_tommorow("1100"), false);
+    it("過去", function(){
+        assert.equal(whiterabbit.is_past(past), true);
+    });
+    it("過去ではない", function(){
+        assert.equal(whiterabbit.is_past(feature), false);
     });
     after(function(done){
         clock.restore();
@@ -120,21 +156,8 @@ describe("normalize_time_units function", function(){
 });
 
 describe("pad_zero", function(){
-    it("stringをゼロで埋める", function(){
-        assert.equal(whiterabbit.pad_zero("1"), "01");
+    it("4桁ゼロで埋める", function(){
         assert.equal(whiterabbit.pad_zero("1", 4), "0001")
-        assert.equal(whiterabbit.pad_zero("11"), "11")
-    });
-    it("objectをゼロで埋める", function(){
-        assert.deepEqual(whiterabbit.pad_zero(
-                {hours: "1", minutes: "20"}
-            ), {hours: "01", minutes: "20"}
-        );
-        assert.deepEqual(whiterabbit.pad_zero(
-            {hours: "1", minutes: "20", seconds: "3000"},
-            4
-            ), {hours: "0001", minutes: "0020", seconds:"3000"}
-        );
     });
 });
 
