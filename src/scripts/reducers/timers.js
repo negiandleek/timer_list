@@ -81,7 +81,7 @@ const timers = (state = initial_state, action) => {
         }
         case "UPDATE_MEMO":{
             const payload = action.payload;
-            return new_state.map(items => {
+            return state.map(items => {
                 if(items.id !== payload.id){
                     return items
                 }
