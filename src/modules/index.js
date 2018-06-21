@@ -65,7 +65,6 @@ export default whiterabbit;
 
 // clock -> "0000"
 // time -> {} or [];
-// unit -> "hours","minutes","seconds","millis";
 // units -> ["hours", "minutes","seconds","millis"];
-// date -> Date type;
-// millis -> millis
+// date -> new Date().getTime(). date mills or dms;
+// millis -> millis or dms
