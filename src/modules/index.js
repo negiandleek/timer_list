@@ -12,6 +12,7 @@ import convert_str_to_milli from "./lib/convertStrToMilli";
 import convert_time_to_milli from "./lib/convertTimeToMilli";
 import display from "./lib/display";
 import generate_date from "./lib/generateDate";
+import get_diff_date_millis from "./lib/getDiffDateMillis";
 import is_numeric from "./lib/isNumeric";
 import is_time_of_object from "./lib/isTimeOfObject";
 import is_time_of_string from "./lib/isTimeOfString";
@@ -25,6 +26,7 @@ import shift_time_to_input from "./lib/shiftTimeToInput";
 import slice_clock from "./lib/sliceClock";
 import undisplay from "./lib/undisplay";
 
+import get_count from "./utils/getCount";
 import get_date from "./utils/getDate";
 
 const whiterabbit = {
@@ -36,6 +38,7 @@ const whiterabbit = {
     convert_str_to_milli,
     display,
     generate_date,
+    get_diff_date_millis,
     is_numeric,
     is_time_of_object,
     is_time_of_string,
@@ -50,6 +53,7 @@ const whiterabbit = {
     undisplay,
 
     // units
+    get_count,
     get_date
 }
 
