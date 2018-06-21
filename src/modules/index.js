@@ -22,7 +22,7 @@ import pad_zero_specific from "./lib/padZeroSpecific";
 import put_time_base_time from "./lib/putTimeBaseTime";
 import put_time_base_ten from "./lib/putTimeBaseTen";
 import shift_time_to_input from "./lib/shiftTimeToInput";
-import slice_time_of_string from "./lib/sliceTimeOfString";
+import slice_clock from "./lib/sliceClock";
 import undisplay from "./lib/undisplay";
 
 import generateTimer from "./utils/generateTimer";
@@ -45,7 +45,7 @@ const whiterabbit = {
     put_time_base_time,
     put_time_base_ten,
     shift_time_to_input,
-    slice_time_of_string,
+    slice_clock,
     normalize_time_units,
     undisplay,
 

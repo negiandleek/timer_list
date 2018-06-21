@@ -202,10 +202,9 @@ describe("shit_time_to_input", function(){
     });
 });
 
-describe("slice_time_of_string", function(){
-    it("アラームの取得", function(){
-        assert.equal(whiterabbit.slice_time_of_string("112233",4,true), "1122")
-        assert.equal(whiterabbit.slice_time_of_string("112233",4,false), "2233")
+describe("slice_clock", function(){
+    it("必要な単位を取得する", function(){
+        assert.equal(whiterabbit.slice_clock("1122334444",1,3), "22334444")
     })
 });
 
