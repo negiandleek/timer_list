@@ -1,9 +1,8 @@
 import alpha from "./alpha";
 import identity from "./identity";
 import _ from "underscore";
-import pad_zero from "./padZero"
 
-export default function concatenate_time_to_str(time, pad){
+export default function concatenate_time_to_clock(time, pad){
     let func = typeof pad === "function"? pad: identity;
     let ary;
 

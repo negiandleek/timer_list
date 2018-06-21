@@ -1,7 +1,7 @@
 import alpha from "./alpha";
 import _ from "underscore";
 
-export default function is_time_of_object(time){
+export default function is_time(time){
     if(time == null || time == ""){
         throw new Error("value is null or undefined");
     }

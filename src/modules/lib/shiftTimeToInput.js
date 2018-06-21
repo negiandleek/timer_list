@@ -1,4 +1,4 @@
-export default function shift_time_to_input(prev, next){
+export default function shift_clock(prev, next){
     let r;
     let diff = String(next).length - String(prev).length;
     if(diff >= 0){

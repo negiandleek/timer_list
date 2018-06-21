@@ -2,7 +2,7 @@ import _ from "underscore";
 
 const reg = /[^0-9]/g;
 
-export default function is_time_of_string_of_string(clock){
+export default function is_clock(clock){
     if(clock == null || typeof clock === "undefined"){
         throw new Error("argument is null or not defined");
     }

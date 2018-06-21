@@ -1,5 +1,4 @@
 import _ from "underscore";
-import is_time_of_string from "./isTimeOfString";
 import pad_zero from "./padZero";
 
 const reg = /[0-9]{0}(?=(?:[0-9]{2})+$)/;
@@ -7,14 +6,9 @@ const down_base = [99,60,60,1000];
 const up_base = [100,100,100,1000];
 
 export default function put_time_base_ten(clock, value){
-    is_time_of_string(clock);
-
-    if(!_.isNumber(value) && _.isNaN(Number(value))){
-        return clock;
-    }
-    if(Number(clock) <= Math.abs(Number(value))){
-        return clock;
-    }
+    // if(!_.isNumber(value) && _.isNaN(Number(value))){
+    //     return clock;
+    // }
     
     let value_string = _.isString(value)? value: String(value);
     let value_length = Math.sign(value) === -1? value_string.length - 1: value_string.length;

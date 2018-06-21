@@ -6,7 +6,7 @@
 */
 import alpha from "./lib/alpha";
 import check_past from "./lib/check_past";
-import concatenate_time_to_str from "./lib/concatenateTimeToStr";
+import concatenate_time_to_clock from "./lib/concatenateTimeToClock";
 import convert_milli_to_time from "./lib/convertMilliToTime";
 import convert_str_to_milli from "./lib/convertStrToMilli";
 import convert_time_to_milli from "./lib/convertTimeToMilli";
@@ -14,8 +14,8 @@ import display from "./lib/display";
 import generate_date_millis from "./lib/generateDateMillis";
 import get_diff_date_millis from "./lib/getDiffDateMillis";
 import is_numeric from "./lib/isNumeric";
-import is_time_of_object from "./lib/isTimeOfObject";
-import is_time_of_string from "./lib/isTimeOfString";
+import is_time from "./lib/isTime";
+import is_clock from "./lib/isClock";
 import normalize_name_follow_time from "./lib/normalizeNameFollowTime";
 import normalize_time_units from "./lib/normalizeTimeUnits";
 import pad_zero from "./lib/padZero";
@@ -32,7 +32,7 @@ import get_date from "./utils/getDate";
 const whiterabbit = {
     alpha,
     check_past,
-    concatenate_time_to_str,
+    concatenate_time_to_clock,
     convert_milli_to_time,
     convert_time_to_milli,
     convert_str_to_milli,
@@ -40,8 +40,8 @@ const whiterabbit = {
     generate_date_millis,
     get_diff_date_millis,
     is_numeric,
-    is_time_of_object,
-    is_time_of_string,
+    is_time,
+    is_clock,
     normalize_name_follow_time,
     pad_zero,
     pad_zero_specific,
