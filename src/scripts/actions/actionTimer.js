@@ -56,9 +56,3 @@ export const clear_interval_global = (dispatch)=>{
     clearInterval(interval_id);
     dispatch({type: "CLEAR_INTERVAL_GLOBAL"});
 }
-
-export const TimerActions = {
-    ADD_TIMER: "ADD_TIMER",
-    DELETE_TIMER: "DELETE_TIMER",
-    UPDATE_TIMER: "UPDATE_TIMER"
-}

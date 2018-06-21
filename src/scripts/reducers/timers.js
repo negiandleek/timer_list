@@ -89,17 +89,6 @@ const timers = (state = initial_state, action) => {
                 return items;
             });
         }
-        case "SET_INTERVAL":{
-            const payload = action.payload;
-
-            return new_state.map(items => {
-                if(items.id !== payload.id){
-                    return items
-                }
-                items.interval_id = payload.interval_id;
-                return items;
-            });
-        }
         case "SET_LOCAL_STORAGE":{
             localStorage.setItem("timers", JSON.stringify(state))
             return state;
