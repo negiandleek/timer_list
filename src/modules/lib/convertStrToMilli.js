@@ -8,9 +8,11 @@ let methods = order.map((str)=>{
 })
 methods[3]="Milliseconds";
 
-export default function convert_str_to_milli(clock, alarm=false, index=0){
+// not alarm -> millis;
+// alarm -> Date millis;
+export default function convert_str_to_milli(clock, alarm=false, start=0){
     if(!alarm){
-        let result = merge(clock, index);
+        let result = merge(clock, start);
         return _.reduce(
             result, 
             (memo, num, index) => {
@@ -33,14 +35,14 @@ export default function convert_str_to_milli(clock, alarm=false, index=0){
     }
 }
 
-function merge(clock, start){
+function merge(clock, head){
     let i = 0;
-    let index = start;
+    let start = head;
     let base = [0,0,0,0];
     while(clock[i] != null){
-        if(typeof base[index] === "undefined")break;
-        base[index] = parseInt(clock.substr(i, alpha.time_digits[(i / 2)]),10);
-        index += 1;
+        if(typeof base[start] === "undefined")break;
+        base[start] = parseInt(clock.substr(i, alpha.time_digits[(i / 2)]),10);
+        start += 1;
         i += alpha.time_digits[(i / 2)];
     }
     return base;

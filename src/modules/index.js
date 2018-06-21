@@ -25,7 +25,7 @@ import shift_time_to_input from "./lib/shiftTimeToInput";
 import slice_clock from "./lib/sliceClock";
 import undisplay from "./lib/undisplay";
 
-import generateTimer from "./utils/generateTimer";
+import get_date from "./utils/getDate";
 
 const whiterabbit = {
     alpha,
@@ -50,7 +50,7 @@ const whiterabbit = {
     undisplay,
 
     // units
-    generateTimer
+    get_date
 }
 
 export default whiterabbit;
