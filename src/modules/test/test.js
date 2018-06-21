@@ -26,11 +26,11 @@ describe("check_past function", function(){
     });
 });
 
-describe("concatenate_time_to_ttr", function(){
+describe("concatenate_time_to_str", function(){
     var obj = {
-        seconds: "3",
+        hours: "1",
         minutes: "2",
-        hours: "1"
+        seconds: "3"
     };
     it("hours, minutes, secondsを連結した文字列にする", function(){
         assert.equal(whiterabbit.concatenate_time_to_str(obj), "123")
@@ -51,7 +51,7 @@ describe("convertMilliToTime", function(){
     });
 });
 
-describe("convertStrToTime", function(){
+describe("convert_str_to_time", function(){
     var temp = new Date();
     var now = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate(), 10,10);
     var fake_clock;
@@ -71,7 +71,7 @@ describe("convertStrToTime", function(){
     });
     describe("timer", function(){
         it("4桁の文字をmilliに変換する", function(){
-            assert.deepEqual(whiterabbit.convert_str_to_milli("1010"), 10 * 60000 + 10 * 1000);
+            assert.deepEqual(whiterabbit.convert_str_to_milli("1010", false, 1), 10 * 60000 + 10 * 1000);
         });
         it("6桁の文字をmilliに変換する", function(){
             assert.deepEqual(whiterabbit.convert_str_to_milli("101010"), 10 * 3600000 + 10 * 60000 + 10 * 1000);
@@ -183,10 +183,14 @@ describe("put_time_base_ten", function(){
 describe("put_time_base_time", function(){
     it("基数がtimeの足し算", function(){
         assert.equal(whiterabbit.put_time_base_time("005959"), "010000");
+    });
+    it("基数がtimeの足し算(切り捨て)", function(){
         assert.equal(whiterabbit.put_time_base_time("5900", "3720000"), "0100");
     });
     it("基数がtimeの引き算", function(){
         assert.equal(whiterabbit.put_time_base_time("010000", "-1000"), "005959");
+    });
+    it("基数がtimeの引き算(切り捨て)", function(){
         assert.equal(whiterabbit.put_time_base_time("6000", "-60000"), "5900");
     });
 });
