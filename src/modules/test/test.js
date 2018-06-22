@@ -28,15 +28,16 @@ describe("check_past function", function(){
 
 describe("concatenate_time_to_clock", function(){
     var obj = {
+        seconds: "3",
         hours: "1",
         minutes: "2",
-        seconds: "3"
+        millis: "4"
     };
     it("hours, minutes, secondsを連結した文字列にする", function(){
-        assert.equal(whiterabbit.concatenate_time_to_clock(obj), "123")
+        assert.equal(whiterabbit.concatenate_time_to_clock(obj), "1234")
     });
     it("hours, minutes, secondsを連結、パッドした文字列にする", function(){
-        assert.equal(whiterabbit.concatenate_time_to_clock(obj, whiterabbit.pad_zero), "010203")
+        assert.equal(whiterabbit.concatenate_time_to_clock(obj, whiterabbit.pad_zero), "0102030004")
     });
 });
 
@@ -116,6 +117,19 @@ describe("display function", function() {
     });
 });
 
+describe("exists_units function", function() {
+    it('存在するunitsのindexを配列で返す', function() {
+        assert.deepEqual(whiterabbit.exist_units({hours: 0, seconds: 0}), [0,2]);
+        assert.deepEqual(whiterabbit.exist_units(["hours", "seconds"]), [0,2]);
+    });
+});
+
+describe("flat_units function", function() {
+    it('単位の引数を配列に変換する', function() {
+        assert.deepEqual(whiterabbit.flat_units(["hours"],"minutes","seconds",["millis"]), ["hours","minutes","seconds","millis"]);
+    });
+});
+
 describe("generate_date", function(){
     var temp = new Date();
     var now = new Date(temp.getFullYear(), temp.getMonth(), temp.getDate(), 10);
@@ -140,20 +154,24 @@ describe("generate_date", function(){
 });
 
 describe("normalize_name_follow_time", function(){
-    it("配列のキーを正規化", function(){
-        assert.deepEqual(whiterabbit.normalize_name_follow_time(["hou","h","minutes", "m"]), ["hours", "minutes"]);
-    });
     it("オブジェクトのキーを正規化", function(){
         assert.deepEqual(whiterabbit.normalize_name_follow_time({hom: 0, h: 0, m: 1, minutes: 2}), {hours: 0, minutes: 1});
     });
 });
 
 describe("normalize_time_units function", function(){
-    it("時間の単位を正規化した配列を返す", function(){
-        assert.deepEqual(whiterabbit.normalize_time_units("seconds,m"), ["minutes","seconds"])
+    it("時間の単位を正規化した文字列を返す", function(){
+        assert.deepEqual(whiterabbit.normalize_units("ms"), "millis");
+        assert.deepEqual(whiterabbit.normalize_units("s"), "seconds");
+        assert.deepEqual(whiterabbit.normalize_units("m"), "minutes");
+        assert.deepEqual(whiterabbit.normalize_units("h"), "hours");
     });
-    it("重複した時間の単位を正規化した配列を返す", function(){
-        assert.deepEqual(whiterabbit.normalize_time_units("m","hours","seconds","minutes"), ["hours","minutes","seconds"])
+});
+
+describe("pad_unit", function(){
+    it("足りない単位を埋める", function(){
+        assert.deepEqual(whiterabbit.pad_units({hours:0, seconds: 0}, [0,2]), {hours: 0, minutes: 0, seconds: 0, millis: 0})
+        assert.deepEqual(whiterabbit.pad_units(["hours", "seconds"], [0,2]), ["hours", "minutes", "seconds", "millis"]);
     });
 });
 
