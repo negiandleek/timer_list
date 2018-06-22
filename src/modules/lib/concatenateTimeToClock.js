@@ -1,20 +1,20 @@
+import _ from "underscore";
 import alpha from "./alpha";
 import identity from "./identity";
-import _ from "underscore";
 
 export default function concatenate_time_to_clock(time, pad){
     let func = typeof pad === "function"? pad: identity;
     let ary;
 
     if(!_.isArray(time) && _.isObject(time)){
-        let padded = _.mapObject(time, (val, key)=>{
-            let index = alpha.time_units.indexOf(key);
-            return func.call(null, String(val), alpha.time_digits[index]);
-        });
+        let padded = _.reduce(alpha.time_units, (memo, key, index)=>{
+            memo[key] = func.call(null, String(time[key]), alpha.time_digits[index]);
+            return memo
+        }, {});
         ary = _.values(padded);
     }else if(_.isArray(time)){
         ary = time.slice();
     }
 
-    return _.reduce(ary, (memo, str)=> memo+str, "");;
+    return _.reduce(ary, (memo, str)=> memo+str, "");
 }

@@ -4,6 +4,7 @@ import alpha from "./alpha";
 let timer_order = alpha.time_order;
 timer_order.push("millis");
 
+// not use?
 export default function pad_zero_specific(...args){
     let time = args[0];
     let param = args[1];
