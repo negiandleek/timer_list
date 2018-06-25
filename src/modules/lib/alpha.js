@@ -5,6 +5,12 @@ const alpha = {
     time_based: [60 * 60 * 1000, 60 * 1000, 1000],
     time_radix: [60 * 60 * 1000, 60 * 1000, 1000, 1],
     time_digits: [2,2,2,4],
-    time_index: [0,2,4,6]
+    time_index: [0,2,4,6],
+    time_init: {
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        millis: 0
+    }
 }
 export default alpha;

@@ -171,7 +171,7 @@ describe("normalize_time_units function", function(){
 describe("pad_unit", function(){
     it("足りない単位を埋める", function(){
         assert.deepEqual(whiterabbit.pad_units({hours:0, seconds: 0}, [0,2]), {hours: 0, minutes: 0, seconds: 0, millis: 0})
-        assert.deepEqual(whiterabbit.pad_units(["hours", "seconds"], [0,2]), ["hours", "minutes", "seconds", "millis"]);
+        // assert.deepEqual(whiterabbit.pad_units(["hours", "seconds"], [0,2]), ["hours", "minutes", "seconds", "millis"]);
     });
 });
 
@@ -192,11 +192,11 @@ describe("pad_zero_specific", function(){
 
 describe("put_time_base_ten", function(){
     it("基数が10の足し算", function(){
-        assert.equal(whiterabbit.put_time_base_ten("090999", "010101"), "101100");
+        assert.deepEqual(whiterabbit.put_time_base_ten("009999", 1000, 0, 2), {hours: 1, minutes: 0, seconds: 0, millis: 0});
     });
     it("基数が10の引き算", function(){
-        assert.equal(whiterabbit.put_time_base_ten("990000", "-010101"), "975859");
-    })
+        assert.deepEqual(whiterabbit.put_time_base_ten("990000", -1000, 0, 2), {hours: 98, minutes: 59, seconds: 59, millis: 0});
+    });
 });
 
 describe("put_time_base_time", function(){

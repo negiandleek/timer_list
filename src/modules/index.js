@@ -7,6 +7,7 @@
 import alpha from "./lib/alpha";
 import check_past from "./lib/check_past";
 import concatenate_time_to_clock from "./lib/concatenateTimeToClock";
+import convert_clock_to_time from "./lib/convertClockToTime";
 import convert_milli_to_time from "./lib/convertMilliToTime";
 import convert_str_to_milli from "./lib/convertStrToMilli";
 import convert_time_to_milli from "./lib/convertTimeToMilli";
@@ -36,6 +37,7 @@ const whiterabbit = {
     alpha,
     check_past,
     concatenate_time_to_clock,
+    convert_clock_to_time,
     convert_milli_to_time,
     convert_time_to_milli,
     convert_str_to_milli,
