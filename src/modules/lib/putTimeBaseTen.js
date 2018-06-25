@@ -1,15 +1,8 @@
 import alpha from "./alpha";
-import pad_zero from "./padZero";
-import milli_to_time from "./convertMilliToTime";
-import concatenate_time_to_clock from "./concatenateTimeToClock";
-import slice_clock from "./sliceClock";
-import to_time from "./convertClockToTime";
 
-const down_base = [99,60,60,1000];
-const up_base = [100,100,100,1000];
-
-function calculation(subject, target, base, sign){
+export default function calculation(subject, target, sign){
     let result = Object.assign({}, subject);
+    let base = sign !== -1? [100,100,100,1000]: [99,60,60,1000];
 
     for(let i = 3; i >= 0; i -= 1){
         let diff = result[alpha.time_units[i]] + sign * target[alpha.time_units[i]];
@@ -29,21 +22,3 @@ function calculation(subject, target, base, sign){
 
     return result;
 }
-
-export default function put_time_base_ten(clock, ms, start=0, end=1){
-    // if(!_.isNumber(value) && _.isNaN(Number(value))){
-    //     return clock;
-    // }
-
-    let sign = Math.sign(ms);
-    let a = milli_to_time(Math.abs(ms));
-    let b = concatenate_time_to_clock(a, pad_zero);
-    let c = slice_clock(b, start, end);
-    let base = sign === 1? up_base: down_base;
-    
-    let origin = to_time(clock, start, end);
-    let calc = to_time(c, start, end);
-
-    return calculation(origin, calc, base, sign);
-}
-

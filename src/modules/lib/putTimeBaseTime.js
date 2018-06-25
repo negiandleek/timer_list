@@ -1,10 +1,10 @@
 import _ from "underscore";
-import concatenate_time_to_clock from "./concatenateTimeToClock";
-import convert_time_to_milli from "./convertTimeToMilli";
-import convert_str_to_milli from "./convertStrToMilli";
-import convert_milli_to_time from "./convertMilliToTime";
-import slice_clock from "./sliceClock";
-import pad_zero from "./padZero";
+import concatenate_time_to_clock from "../lib/concatenateTimeToClock";
+import convert_time_to_milli from "../lib/convertTimeToMilli";
+import convert_str_to_milli from "../lib/convertStrToMilli";
+import convert_milli_to_time from "../lib/convertMilliToTime";
+import slice_clock from "../lib/sliceClock";
+import pad_zero from "../lib/padZero";
 
 export default function put_time_base_time(clock, ms = "1000", start=0, end=1){
 
@@ -26,6 +26,4 @@ export default function put_time_base_time(clock, ms = "1000", start=0, end=1){
     let result = concatenate_time_to_clock(date)
     return slice_clock(result, start, end);
 }
-
-console.log("put_time_base_time",put_time_base_time("005959",1000,0,2), "010000");
 

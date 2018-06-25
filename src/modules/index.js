@@ -30,6 +30,8 @@ import shift_time_to_input from "./lib/shiftTimeToInput";
 import slice_clock from "./lib/sliceClock";
 import undisplay from "./lib/undisplay";
 
+import calc_base_ten from "./utils/calcBaseTen";
+import calc_base_time from "./utils/calcBaseTime";
 import get_count from "./utils/getCount";
 import get_date from "./utils/getDate";
 
@@ -61,15 +63,13 @@ const whiterabbit = {
     undisplay,
 
     // units
+    calc_base_ten,
+    calc_base_time,
     get_count,
-    get_date
+    get_date,
 }
 
 export default whiterabbit;
-
-// TODO:
-// 必要なタイムを自由に取得できるように拡張する
-// millis対応
 
 // clock -> "0000"
 // time -> {} or [];
