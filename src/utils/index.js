@@ -13,7 +13,7 @@ export function get_time_of_string(time, isAlarm){
 };
 
 export function get_remaining_time(date, isAlarm){
-    let time = ticktack.convert_milli_to_time(date);
+    let time = ticktack.milli_to_time(date);
     return ticktack.pad_zero(time, 2);
 };
 

@@ -1,10 +1,6 @@
 import alpha from "./alpha";
 
 export default function convert_clock_to_time(value, start = 0, end = 1){
-    // if(!_.isNumber(value) && _.isNaN(Number(value))){
-    //     return clock;
-    // }
-
     let time = Object.assign({}, alpha.time_init);
     let index = 0;
 

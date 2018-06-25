@@ -1,12 +1,13 @@
 import _ from "underscore";
-import alpha from "./alpha";
 
-let base = {};
-_.each(alpha.time_order, function(key, i){
-    base[key] = alpha.time_based[i]
-});
+import alpha from "../lib/alpha";
 
-export default function convert_time_to_milli(time){
+let base = _.reduce(alpha.time_order, (memo, key, i)=>{
+    memo[key] = alpha.time_based[i];
+    return memo;
+}, {});
+
+export default function time_to_milli(time){
     let result = _.reduce(
         time, 
         (memo, value, key) => {

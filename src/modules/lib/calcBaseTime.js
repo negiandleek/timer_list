@@ -1,12 +1,14 @@
 import _ from "underscore";
-import time_to_clock from "../lib/concatenateTimeToClock";
-import time_to_milli from "../lib/convertTimeToMilli";
-import str_to_milli from "../lib/convertStrToMilli";
-import milli_to_time from "../lib/convertMilliToTime";
-import slice_clock from "../lib/sliceClock";
-import pad_zero from "../lib/padZero";
 
-export default function put_time_base_time(clock, millis = "1000", start=0, end=1){
+import pad_zero from "./padZero";
+import time_to_clock from "./timeToClock";
+
+import clock_to_milli from "./clockToMilli";
+import milli_to_time from "./milliToTime";
+import time_to_milli from "./timeToMilli";
+import slice_clock from "./sliceClock";
+
+export default function calc_base_time(clock, millis = "1000", start=0, end=1){
     let result = _.compose(
         (time)=>time_to_clock(time),
         (time)=>{
@@ -15,7 +17,7 @@ export default function put_time_base_time(clock, millis = "1000", start=0, end=
         (ms)=>milli_to_time(parseInt(ms,10) + parseInt(millis,10)),
         (time)=>time_to_milli(time),
         (ms)=>milli_to_time(ms),
-        (clock)=>str_to_milli(clock, false, start)
+        (clock)=>clock_to_milli(clock, false, start)
     )(clock);
 
     if(result < 0){
@@ -29,6 +31,6 @@ export default function put_time_base_time(clock, millis = "1000", start=0, end=
             return _.mapObject(time, (ms, key)=> pad_zero(ms, 2));
         },
         (ms)=>milli_to_time(ms),
-        (clock)=>str_to_milli(clock)
+        (clock)=>clock_to_milli(clock)
     )(result);
 }

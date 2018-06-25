@@ -1,9 +1,10 @@
-import alpha from "./alpha";
+import alpha from "../lib/alpha";
+
 const h = alpha.time_based[0];
 const m = alpha.time_based[1];
 const s = alpha.time_based[2];
 
-export default function convert_milli_to_time(ms){
+export default function milli_to_time(ms){
     let result = parseInt(ms,10);
     let hours = 0;
     let minutes = 0;

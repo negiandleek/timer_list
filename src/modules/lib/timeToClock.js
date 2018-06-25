@@ -2,7 +2,7 @@ import _ from "underscore";
 import alpha from "./alpha";
 import identity from "./identity";
 
-export default function concatenate_time_to_clock(time, pad){
+export default function time_to_clock(time, pad){
     let func = typeof pad === "function"? pad: identity;
     let ary;
 
