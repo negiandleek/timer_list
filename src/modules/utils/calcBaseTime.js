@@ -10,7 +10,11 @@ import time_to_clock from "../lib/timeToClock";
 import is_time from "../lib/isTime";
 import is_clock from "../lib/isClock";
 import is_numeric from "../lib/isNumeric";
+import alpha from "../lib/alpha";
 
+import time_to_milli from "../lib/timeToMilli";
+
+//TODO subはmsではなくclockで行う。
 export default function calc_base_time(value, sub = {seconds: 1}, start=0, end=1){
     let subject;
     let target;
@@ -18,32 +22,33 @@ export default function calc_base_time(value, sub = {seconds: 1}, start=0, end=1
 
     if(_.isObject(value)){
         is_time(value);
-        subject = time_to_clock(pad_time(value), pad_zero);
+        subject = time_to_milli(pad_time(value));
         obj_flag = true;
     }else{
         is_clock(value);
-        subject = value;
+        subject = clock_to_milli(subject);
     }
-    subject = clock_to_milli(subject)
 
     if(_.isObject(sub)){
         is_time(sub);
-        target = time_to_clock(pad_time(sub), pad_zero);
-        target = clock_to_milli(target);
+        target = time_to_milli(pad_time(sub));
     }else{
         is_numeric(sub);
         target = sub;
     }
 
-    let result = parseInt(subject,10) + parseInt(target, 10)
+    let total = parseInt(subject,10) + parseInt(target, 10);
+    let result;
 
-    if(result < 0){
-        return 0;
-    }
-    let time = milli_to_time(result);
-    if(obj_flag){
-        return time
+    if(total < 0){
+        result = alpha.time_init;
     }else{
-        return slice_clock(time_to_clock(time, pad_zero), start, end)
+        result = milli_to_time(total);
+    }
+
+    if(obj_flag){
+        return result;
+    }else{
+        return slice_clock(time_to_clock(result, pad_zero), start, end)
     }
 }

@@ -24,8 +24,10 @@ function merge(clock, head){
 
 export default function clock_to_milli(clock, alarm=false, start=0){
     if(!alarm){
-        let result = merge(clock, start);
-        return _.reduce(
+        let sign = Math.sign(parseInt(clock, 10)) === -1? "-": "";
+        let sliced = sign === -1? clock.slice(1): clock;
+        let result = merge(sliced, start);
+        return sign + _.reduce(
             result, 
             (memo, num, index) => {
                 return memo + (num * alpha.time_radix[index]);

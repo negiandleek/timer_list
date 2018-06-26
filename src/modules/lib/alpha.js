@@ -12,6 +12,7 @@ const alpha = {
         minutes: 0,
         seconds: 0,
         millis: 0
-    }
+    },
+    clock_init: "0000000000"
 }
 export default alpha;

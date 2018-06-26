@@ -5,7 +5,8 @@ const m = alpha.time_based[1];
 const s = alpha.time_based[2];
 
 export default function milli_to_time(ms){
-    let result = parseInt(ms,10);
+    let sign = Math.sign(ms);
+    let result = Math.abs(parseInt(ms,10));
     let hours = 0;
     let minutes = 0;
     let seconds = 0;
@@ -23,9 +24,9 @@ export default function milli_to_time(ms){
     millis = result;
 
     return {
-        hours,
-        minutes,
-        seconds,
-        millis
+        hours: sign * hours,
+        minutes: sign * minutes,
+        seconds: sign * seconds,
+        millis: sign * millis
     };
 }
