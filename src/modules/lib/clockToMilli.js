@@ -1,7 +1,7 @@
 import _ from "underscore";
 
 import alpha from "./alpha";
-import check_past from "./check_past";
+import check_past from "./checkPast";
 
 let order = alpha.time_order.slice();
 let methods = order.map((str)=>{
