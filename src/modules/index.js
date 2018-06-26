@@ -26,7 +26,7 @@ import generate_dms from "./lib/generateDMs";
 import get_count from "./utils/getCount";
 import get_date from "./utils/getDate";
 import milli_to_time from "./lib/milliToTime";
-import shift_time_to_input from "./lib/shiftTimeToInput";
+import shift_clock from "./lib/shiftClock";
 import slice_clock from "./lib/sliceClock";
 import time_to_milli from "./lib/timeToMilli";
 import pad_time from "./lib/padTime";
@@ -58,7 +58,7 @@ const whiterabbit = {
     generate_dms,
     get_count,
     get_date,
-    shift_time_to_input,
+    shift_clock,
     slice_clock,
     pad_time,
     undisplay,
