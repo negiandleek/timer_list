@@ -13,6 +13,7 @@ import is_clock from "../lib/isClock";
 import is_time from "../lib/isTime";
 import is_numeric from "../lib/isNumeric";
 
+//TODO subはmsではなくclockで行う。
 export default function calc_base_ten(value, sub={seconds: 1}, start=0, end=1){
     let subject;
     let target;
