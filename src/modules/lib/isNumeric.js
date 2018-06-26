@@ -6,5 +6,5 @@ export default function is_numeric(){
             throw new TypeError("arg must be Number or String convertible Number.");
         }
     }
-    return arguments;
+    return true;
 }

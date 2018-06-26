@@ -1,12 +1,12 @@
 import _ from "underscore";
 
-import pad_zero from "./padZero";
-import time_to_clock from "./timeToClock";
+import pad_zero from "../lib/padZero";
+import time_to_clock from "../lib/timeToClock";
 
-import clock_to_milli from "./clockToMilli";
-import milli_to_time from "./milliToTime";
-import time_to_milli from "./timeToMilli";
-import slice_clock from "./sliceClock";
+import clock_to_milli from "../lib/clockToMilli";
+import milli_to_time from "../lib/milliToTime";
+import time_to_milli from "../lib/timeToMilli";
+import slice_clock from "../lib/sliceClock";
 
 export default function calc_base_time(clock, millis = "1000", start=0, end=1){
     let result = _.compose(

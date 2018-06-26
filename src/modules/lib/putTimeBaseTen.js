@@ -1,6 +1,6 @@
 import alpha from "./alpha";
 
-export default function calculation(subject, target, sign){
+export default function calculation(subject, target, sign = 1){
     let result = Object.assign({}, subject);
     let base = sign !== -1? [100,100,100,1000]: [99,60,60,1000];
 

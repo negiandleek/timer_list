@@ -5,8 +5,8 @@
 }
 */
 import alpha from "./lib/alpha";
-import calc_base_ten from "./lib/calcBaseTen";
-import calc_base_time from "./lib/calcBaseTime";
+import calc_base_ten from "./utils/calcBaseTen";
+import calc_base_time from "./utils/calcBaseTime";
 import check_past from "./lib/check_past";
 import exist_units from "./lib/existUnits";
 import is_numeric from "./lib/isNumeric";

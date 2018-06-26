@@ -2,8 +2,7 @@ import _ from "underscore";
 import alpha from "./alpha";
 
 // h,m,s,ms
-let head = _.map(alpha.time_units,value => value.charAt(0));
-head[3] += "s";
+let head = alpha.time_head_units;
 const relation = _.object(head, alpha.time_units);
 
 export default function normalize_unit(unit){

@@ -1,6 +1,6 @@
 import alpha from "./alpha";
 
-export default function convert_clock_to_time(value, start = 0, end = 1){
+export default function clock_to_time(value, start = 0, end = 1){
     let time = Object.assign({}, alpha.time_init);
     let index = 0;
 

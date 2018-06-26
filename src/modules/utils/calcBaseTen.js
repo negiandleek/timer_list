@@ -1,9 +1,8 @@
 import _ from "underscore";
 
-import calculation from  "./putTimeBaseTen";
-import pad_zero from "./padZero";
-import time_to_clock from "./timeToClock";
-
+import calculation from  "../lib/putTimeBaseTen";
+import pad_zero from "../lib/padZero";
+import time_to_clock from "../lib/timeToClock";
 import milli_to_time from "../lib/milliToTime";
 import slice_clock from "../lib/sliceClock";
 import to_time from "../lib/clockToTime";
