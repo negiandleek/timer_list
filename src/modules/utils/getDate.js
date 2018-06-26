@@ -1,9 +1,8 @@
 import _ from "underscore";
 
-import exist_units from "../lib/existUnits";
 import is_clock from "../lib/isClock";
 import normalize_units from "../lib/normalizeUnits";
-import pad_units from "../lib/padUnits";
+import pad_time from "../lib/padTime";
 import pad_zero from "../lib/padZero";
 import time_to_clock from "../lib/timeToClock";
 
@@ -22,8 +21,8 @@ export default function get_date(value, alarm=false, start=0){
             }
             return result;
         }, {});
-        let existing = exist_units(normalized); 
-        let padded = pad_units(normalized, existing);
+
+        let padded = pad_time(normalized);
 
         clock = slice_clock.apply(
             this, 

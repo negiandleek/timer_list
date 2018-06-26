@@ -29,6 +29,7 @@ import milli_to_time from "./lib/milliToTime";
 import shift_time_to_input from "./lib/shiftTimeToInput";
 import slice_clock from "./lib/sliceClock";
 import time_to_milli from "./lib/timeToMilli";
+import pad_time from "./lib/padTime";
 import undisplay from "./utils/undisplay";
 
 const whiterabbit = {
@@ -59,6 +60,7 @@ const whiterabbit = {
     get_date,
     shift_time_to_input,
     slice_clock,
+    pad_time,
     undisplay,
 }
 
