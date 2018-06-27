@@ -44,9 +44,14 @@ export default class TimerForm extends React.Component{
             return void 0;
         }
         
-        let date = whiterabbit.generate_dms(this.props.form.count, alarmFlag);
-        let diff = whiterabbit.diff_dms(date);
-        let count = whiterabbit.get_count(diff, alarmFlag, 1, 2);
+        let ms = whiterabbit.clock_to_milli(this.props.form.count, alarmFlag);
+        let date;
+        if(!alarmFlag){
+            date = whiterabbit.generate_dms(ms) + 999;
+        }else{
+            date = ms;
+        }
+        let count = whiterabbit.get_count(date, 0, 2);
         
         this.props.add_timer(
             count,

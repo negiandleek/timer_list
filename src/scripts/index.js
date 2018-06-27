@@ -14,6 +14,6 @@ ReactDOM.render(
     document.getElementById("root")
 )
 
-// window.addEventListener("beforeunload", ()=>{
-//     store.dispatch({type: "SET_LOCAL_STORAGE"});
-// });
+window.addEventListener("beforeunload", ()=>{
+    store.dispatch({type: "SET_LOCAL_STORAGE"});
+});

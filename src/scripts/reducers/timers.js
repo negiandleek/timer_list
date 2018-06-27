@@ -41,17 +41,19 @@ const timers = (state = initial_state, action) => {
 
         case "UPDATE_TIMER":{
             let new_state = _.sortBy(state, (obj)=> parseInt(obj.count, 10));
+
             return new_state.map(items => {
                 if(items.stoped_flag)return items;
-                const date = (items.date instanceof Date)? items.date: new Date(items.date);
-                const diff = whiterabbit.diff_dms(date);
+                
+                const diff = whiterabbit.diff_dms(items.date);
+
                 if(diff <= 0){
                     items.count = "0".repeat(4 + (items.alarm_flag * 2));
                     items.active_flag = false;
                 }else{
-                    items.count = whiterabbit.get_count(diff, 1, 2);
-                    items.date = date;
+                    items.count = whiterabbit.get_count(items.date, 0, 2);
                 }
+
                 return items;
             });
         }
@@ -62,8 +64,9 @@ const timers = (state = initial_state, action) => {
                 if(items.id !== payload.id){
                     return items
                 }
+                let ms = whiterabbit.clock_to_milli(items.count);
                 items.stoped_flag = false;
-                items.date = whiterabbit.generate_dms(items.count, false);
+                items.date = whiterabbit.generate_dms(ms, false);
                 return items;
             });
         }
