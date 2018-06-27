@@ -1,0 +1,41 @@
+$black: #242424;
+$white: #ffffff;
+$base: #FAFAFA;
+$gray: #F1F1F1;
+$blue: #64B5F6;
+$green: #81C784;
+
+body{
+    margin: 0px;
+    color: $black;
+    background-color: $base;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+input[type=text],input[type=button]{
+    color: $black;
+    padding: 0;
+    margin: 0;
+    background-color: $white;
+    border: none;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+
+input[type=button]{
+    font-weight: 100;
+}
+
+p,h1,h2,h3,h4,h5,h6{
+    font-size: 1em;
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ticktack from "../modules/index";
+import whiterabbit from "../modules/index";
 import * as utils from "../utils"
 
 export default class Timer extends React.Component{
@@ -8,15 +8,17 @@ export default class Timer extends React.Component{
         super(props);
         this.state = {
             memo_flag: false,
-            chime_flag: true,
+            current_flag: true,
+            chime_flag: true
         };
         this.textInput = React.createRef();
     }
     componentDidMount(){
         if(parseInt(this.props.data.count, 10) === 0){
             this.setState({
-                chime_flag: false
-            })
+                chime_flag: false,
+                current_flag: false
+            });
         };
     }
     componentDidUpdate(prevProps, prevState){
@@ -28,44 +30,36 @@ export default class Timer extends React.Component{
                 chime_flag: false,
             });
             utils.chime.play(3);
+            utils.notice(this.props.data.memo);
         }
     }
     render(){
-        const correct_count = ticktack.display(this.props.data.count);
+        const correct_count = whiterabbit.display(this.props.data.count);
         const data = this.props.data;
         return (
             <div className="timer">
-                {correct_count}
                 <div className="timer__memo">
                     <input 
+                        className="timer__memo__input"
                         type="text"
                         ref={this.textInput}
                         value={this.props.data.memo}
+                        placeholder="memo"
                         onBlur={this.toggle_state.bind(this)}
                         onChange={(e)=>this.props.update_memo(
-                            data.parent_id,
-                            data.child_id,
+                            data.id,
                             e.target.value
                         )}
                     />
                 </div>
-                <div className="timer__btns">
-                    {!this.props.data.type ?
-                        <input type="button" value="resume" onClick={this.resume.bind(this)} />:
-                        null
-                    }
-                    {!this.props.data.type?
-                        <input type="button" value="stop" onClick={this.stop.bind(this)} />:
-                        null
-                    }
-                    <input type="button" value="delete" onClick={()=>{
-                        clearInterval(this.props.data.interval_id)
-                        this.props.delete_timer(
-                            this.props.data.parent_id, 
-                            this.props.data.child_id
-                        )
-                    }} />
-                </div>
+                <p className={"timer__item " + (!this.props.data.stoped_flag && !this.props.data.active_flag && this.state.current_flag? "siren": "")}>
+                    {correct_count}
+                </p>
+                {this.props.data.stoped_flag && this.props.data.active_flag?
+                    <input type="button" value="resume" className="timer__resume" onClick={this.resume.bind(this)} />:
+                    <input type="button" value="stop" className="timer__stop" onClick={this.stop.bind(this)} />
+                }
+                <div className="timer__delete" value="delete" onClick={this.delete.bind(this)}>×</div>
             </div>
         )
     }
@@ -77,26 +71,26 @@ export default class Timer extends React.Component{
     resume(){
         const data = this.props.data;
         if(data.stoped_flag){
-            this.props.resume_timer(data.child_id);
+            this.props.resume_timer(data.id);
         }
     }
     stop(){
         const data = this.props.data;
-        console.log(utils.chime.audio.state)
         if(!data.stoped_flag){
-            this.props.stop_timer(data.child_id);
-            if(utils.chime.audio.state === 2){
-                utils.chime.stop();
-            }
+            this.props.stop_timer(data.id);
+            utils.chime.stop();
         }
+    }
+    delete(){
+        this.props.delete_timer(this.props.data.id)
+        utils.chime.stop();
     }
 }
 
 Timer.propTypes = {
     count: PropTypes.number,
     data: PropTypes.shape({
-        parent_id: PropTypes.number,
-        child_id: PropTypes.string,
+        id: PropTypes.string,
         date: PropTypes.Object,
         stoped_flag: PropTypes.bool,
         type: PropTypes.number,

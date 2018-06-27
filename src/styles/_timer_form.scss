@@ -1,0 +1,14 @@
+.timer_form{
+    position: relative;
+    &__text[type=text]{
+        width: 100%;
+        padding: 0px 0px 4px;
+        font-size: 2em;
+        text-align: center;
+        border-bottom: 3px solid $gray;
+        margin: 8px 0px 8px;
+        &:focus{
+            outline: 0;
+        }
+    }
+}

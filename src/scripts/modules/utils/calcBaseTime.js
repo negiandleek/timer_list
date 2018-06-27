@@ -52,5 +52,3 @@ export default function calc_base_time(value, sub = {seconds: 1}, start=0, end=1
         return slice_clock(time_to_clock(result, pad_zero), start, end)
     }
 }
-
-console.log(calc_base_time({hours:1, minutes: 59}, {hours:2, minutes:3}));

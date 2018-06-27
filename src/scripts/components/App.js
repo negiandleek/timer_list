@@ -1,6 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-import ticktack from "../modules/index";
 
 import ContainerTimerForm from "../containers/ContainerTimerForm";
 import ContainerTimerList from "../containers/ContainerTimerList";

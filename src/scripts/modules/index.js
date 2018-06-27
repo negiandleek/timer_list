@@ -32,11 +32,11 @@ import clock_to_time from "./utils/composeClockToTime";
 import diff_dms from "./utils/composeDiffDMs";
 import generate_dms from "./utils/composeGenerateDMs";
 import milli_to_time from "./utils/composeMilliToTime";
-import shift_clock from "./utils/composeShiftClock";
 import time_to_clock from "./utils/composeTimeToClock";
 import display from "./utils/display";
 import get_count from "./utils/getCount";
 import get_date from "./utils/getDate";
+import shift_clock from "./utils/shiftClock";
 import undisplay from "./utils/undisplay";
 
 const whiterabbit = {
@@ -52,6 +52,7 @@ const whiterabbit = {
     display,
     get_count,
     get_date,
+    shift_clock,
     undisplay
 }
 

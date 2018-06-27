@@ -1,0 +1,7 @@
+.timer_list{
+    position: relative;
+    &>ul>li{
+        position: absolute;
+        width: 100%;
+    }
+}

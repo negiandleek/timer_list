@@ -1,18 +1,16 @@
-export const add_timer = (parentId, count, date, type) => ({
+export const add_timer = (count, date, alarm_flag) => ({
     type: "ADD_TIMER",
     payload: {
-        parent_id: parentId,
         count,
         date,
-        type
+        alarm_flag
     }
 });
 
-export const delete_timer = (parentId, childId, intervalId) => ({
+export const delete_timer = (id, intervalId) => ({
     type: "DELETE_TIMER",
     payload: {
-        parent_id: parentId,
-        child_id: childId,
+        id,
         interval_id: intervalId
     }
 });
@@ -21,27 +19,26 @@ export const update_timer = () => ({
     type: "UPDATE_TIMER"
 });
 
-export const stop_timer = (child_id) => ({
+export const stop_timer = (id) => ({
     type: "STOP_TIMER",
     payload: {
-        child_id
+        id
     }
 });
 
-export const resume_timer = (child_id) => {
+export const resume_timer = (id) => {
     return {
         type: "RESUME_TIMER",
         payload: {
-            child_id
+            id
         }
     }
 };
 
-export const update_memo = (parent_id, child_id, value) => ({
+export const update_memo = (id, value) => ({
     type: "UPDATE_MEMO",
     payload: {
-        parent_id,
-        child_id,
+        id,
         value
     }
 });
@@ -58,10 +55,4 @@ export const clear_interval_global = (dispatch)=>{
     interval_id = 0;
     clearInterval(interval_id);
     dispatch({type: "CLEAR_INTERVAL_GLOBAL"});
-}
-
-export const TimerActions = {
-    ADD_TIMER: "ADD_TIMER",
-    DELETE_TIMER: "DELETE_TIMER",
-    UPDATE_TIMER: "UPDATE_TIMER"
 }
