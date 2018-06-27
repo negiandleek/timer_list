@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
+import whiterabbit from "white-rabbit-watch";
 import Timers from "../components/Timers";
 import actions from "../actions";
-import whiterabbit from "../modules/";
 
 // timer_list component -> timersに変更　App.js参照
 const mapStateToProps = state => {

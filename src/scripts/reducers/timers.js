@@ -1,5 +1,5 @@
 import _ from "underscore";
-import whiterabbit from "../modules";
+import whiterabbit from "white-rabbit-watch";
 
 const initial_state = [];
 

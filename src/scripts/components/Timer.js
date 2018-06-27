@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import whiterabbit from "../modules/index";
+import whiterabbit from "white-rabbit-watch";
 import * as utils from "../utils"
 
 export default class Timer extends React.Component{

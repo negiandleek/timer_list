@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import whiterabbit from "../modules/index";
+import whiterabbit from "white-rabbit-watch";
 
 function pin_right(_prev, _next){
     let origin = _next;
